@@ -1,0 +1,71 @@
+/* HeroSection.js */
+
+.hero-section {
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.hero-content-container {
+    flex: 1 1 50%;
+    margin: auto;
+}
+
+.hero-content {
+    max-width: 500px;
+    margin: auto;
+}
+
+.hero-title{
+    margin: 0;
+    font-size: 2.5vw;
+}
+
+.hero-description {
+    line-height: 140%;
+}
+
+.hero-image {
+    flex: 1 1 50%;
+}
+
+.cta-buttons{
+    margin: 20px 0px;
+}
+
+.btn-primary {
+    background-color: #000000;
+    color: #fff;
+    transition: transform 0.5s ease-in-out;
+}
+
+.btn-primary:hover {
+    transform: scale(1.1);
+}
+
+.btn-secondary {
+    background-color: #00000000;
+    color: #000000;
+}
+
+
+
+
+@media screen and (max-width: 768px) {
+    .notification span {
+        right: 10px;
+    }
+
+    .hero-content,
+    .hero-image {
+        flex: 1 1 100%;
+    }
+
+    .hero-title{
+        font-size: 1.875rem;
+    }
+
+}
