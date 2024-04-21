@@ -1,9 +1,12 @@
 import './App.css';
+import Navigation from '../src/Component/Navigation';
+import HomePage from '../src/Component/HomePage';
 
 function App() {
   return (
     <>
-    <h1> hhmm</h1>
+        <Navigation />
+        <HomePage />
     </>
   );
 }
