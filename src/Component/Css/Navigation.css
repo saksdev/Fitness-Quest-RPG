@@ -80,23 +80,20 @@ nav {
   position: fixed;
   width: 100%;
   left: 0;
-  top: 0;
+  bottom: 0;
   background-color: #fff;
   transition: 200ms 300ms;
   z-index: -1;
   overflow: scroll;
-  
-}
-
-#drawer-input:checked~.nav-links-2{
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  gap: 3rem;
   transition: all 500ms cubic-bezier(.10, .0, .80, .0);
-  height: 100vh;
-
+  height: calc(-90px + 100vh);
 }
+
 
 .items {
   width: 100%;
