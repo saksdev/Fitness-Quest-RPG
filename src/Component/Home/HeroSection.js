@@ -3,8 +3,8 @@ import fitnessQuestImage from '../../img/FitnessQuestRPG.svg'
 
 const HeroSection = () => {
   return (
-    <section className="hero-section">
-      <div className="container">
+    <section className="section1">
+      <div className="hero-section">
         <div className="hero-content-container">
           <div className='hero-content'>
             <h1 className="hero-title">Earn Rewards and Level Up Your Fitness</h1>
@@ -16,7 +16,7 @@ const HeroSection = () => {
           </div>
         </div>
         <div className="hero-image">
-          <img src={fitnessQuestImage} alt="Fitness Quest RPG" /> 
+          <img src={fitnessQuestImage} alt="Fitness Quest RPG" />
         </div>
       </div>
     </section>
