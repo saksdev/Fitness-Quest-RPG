@@ -70,12 +70,6 @@ nav {
   gap: 4vw;
 }
 
-.navbar-links a {
-  text-decoration: none;
-  color: #333;
-}
-
-
 .nav-links-2 {
   position: fixed;
   width: 100%;
@@ -94,6 +88,12 @@ nav {
   height: calc(-90px + 100vh);
 }
 
+.nav-links-2 a{
+  width: 250px;
+  text-align: center;
+  font-weight: 600;
+  text-transform: uppercase;
+}
 
 .items {
   width: 100%;
@@ -126,7 +126,7 @@ nav {
   height: 2.5px;
   width: 25px;
   background-color: currentColor;
-  transition: 400ms 350ms;
+  transition: 200ms 150ms;
   position: absolute;
 }
 
@@ -140,18 +140,18 @@ nav {
 
 #drawer-input:checked~.drawer-open span {
   width: 0px;
-  transition: 100ms;
+  transition: 50ms;
 }
 
 
 #drawer-input:checked~.drawer-open span::before {
   bottom: 0;
-  transition: all 400ms 100ms cubic-bezier(.10, .0, .85, .0);
+  transition: all 50ms 50ms cubic-bezier(.10, .0, .85, .0);
   transform: rotate(45deg);
 }
 
 #drawer-input:checked~.drawer-open span::after {
   top: 0;
-  transition: all 400ms 100ms cubic-bezier(.10, .0, .85, .0);
+  transition: all 50ms 50ms cubic-bezier(.10, .0, .85, .0);
   transform: rotate(-45deg);
 }

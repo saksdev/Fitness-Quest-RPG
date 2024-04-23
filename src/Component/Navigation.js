@@ -77,22 +77,15 @@ const ResponsiveNavbar = () => {
             <label htmlFor="drawer-input" className="drawer-open">
               <span></span>
             </label>
-            {isChecked && (<div className="nav-links-2">
-              <a href="/">Home</a>
-
-              <a href="/features">Features</a>
-
-              <a href="/about">About</a>
-
-              <a href="/contact">Contact</a>
-
-              <a href="/login" className="btn btn-secondary">
-                Log In
-              </a>
-              <a href="/signup" className="btn btn-primary">
-                Sign Up
-              </a>
-            </div>
+            {isChecked && (
+              <div className="nav-links-2">
+                <a href="/">Home</a>
+                <a href="/features">Features</a>
+                <a href="/about">About</a>
+                <a href="/contact">Contact</a>
+                <a href="/login" className="btn btn-secondary">Log In</a>
+                <a href="/signup" className="btn btn-primary">Sign Up</a>
+              </div>
             )}
           </div>
         )}
