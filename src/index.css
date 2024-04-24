@@ -15,11 +15,32 @@ body {
   display: none;
 }
 
-h1, h2, h3, h4, h5, h6{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--head-font);
   line-height: 140%;
 }
 
-ul{
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2.3rem;
+}
+
+@media screen and (max-width: 900px) {
+  h1 {
+    font-size: 2rem;
+  }
+}
+
+/* @media (max-width: 768px) {} */
+
+ul {
   list-style: none;
 }

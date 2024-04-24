@@ -2,16 +2,16 @@
 
 import React from 'react';
 import './Css/HomePage.css'
-import HeroSection from './Home/HeroSection.js';
-// import FeaturesSection from './Home/FeaturesSection';
+import Section1 from './Home/Section1.js';
+import Section2 from './Home/Section2.js';
 
 const HomePage = () => {
-  return (
-	<>
-	<HeroSection />
-	{/* <FeaturesSection /> */}
-	</>
-  );
+	return (
+		<>
+			<Section1 />
+			<Section2 />
+		</>
+	);
 };
 
 export default HomePage;

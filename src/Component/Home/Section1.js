@@ -7,7 +7,7 @@ const HeroSection = () => {
       <div className="hero-section">
         <div className="hero-content-container">
           <div className='hero-content'>
-            <h1 className="hero-title">Earn Rewards and Level Up Your Fitness</h1>
+            <h1>Earn Rewards and Level Up Your Fitness</h1>
             <p className="hero-description">Get Fit with Fitness Quest RPG - an exciting role-playing game that turns your workouts into epic adventures!</p>
             <div className="cta-buttons">
               <a href="/signup" className="btn btn-primary">Sign Up Now</a>

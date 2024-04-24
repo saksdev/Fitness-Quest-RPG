@@ -5,12 +5,15 @@ import '../Component/Css/Navigation.css';
 
 const ResponsiveNavbar = () => {
 
+  const [isVisible, setIsVisible] = useState(true);
+  const handleCloseNotification = () => {
+    setIsVisible(false);
+  };
+
   const [isChecked, setIsChecked] = useState(false);
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
   };
-
-
 
   const [isWideScreen, setIsWideScreen] = useState(window.innerWidth >= 768);
   const handleResize = () => {
@@ -22,11 +25,6 @@ const ResponsiveNavbar = () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-
-  const [isVisible, setIsVisible] = useState(true);
-  const handleCloseNotification = () => {
-    setIsVisible(false);
-  };
 
   return (
     <nav>

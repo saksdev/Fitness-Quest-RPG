@@ -1,8 +1,4 @@
-/* HeroSection.js */
-
-.section1 {
-    height: 100vh;
-}
+/* Section1.js */
 
 .hero-section {
     display: flex;
@@ -15,13 +11,12 @@
 }
 
 .hero-content {
-    max-width: 500px;
+    max-width: 550px;
     margin: auto;
 }
 
-.hero-title{
+.hero-content h1{
     margin: 0;
-    font-size: 2.5vw;
 }
 
 .hero-description {
@@ -51,11 +46,60 @@
     color: #000000;
 }
 
-@media screen and (max-width: 768px) {
-    .notification span {
-        right: 10px;
-    }
+/* Section1.js  End */
 
+
+/* Section 2 */
+
+.features .features-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .features h1 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 3rem;
+  }
+  
+  .feature-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+  
+  .feature {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .feature:hover {
+    transform: translateY(-5px);
+  }
+  
+  .feature img {
+    max-width: 80px;
+    margin-bottom: 1rem;
+  }
+  
+  .feature h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .feature p {
+    color: #666;
+    line-height: 1.6;
+  }
+
+
+
+
+@media screen and (max-width: 768px) {
     .hero-content,
     .hero-image {
         flex: 1 1 100%;
