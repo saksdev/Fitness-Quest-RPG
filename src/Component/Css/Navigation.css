@@ -87,14 +87,31 @@ nav {
   gap: 3rem;
   transition: all 500ms cubic-bezier(.10, .0, .80, .0);
   height: calc(-90px + 100vh);
-  padding-top: 30px;
+  padding-top: 60px;
 }
 
 .nav-links-2 a {
+  position: relative;
   width: 250px;
   text-align: center;
   font-weight: 600;
 }
+
+/* .nav-links-2 a::before {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #000;
+  transform: translateX(-50%);
+  transition: width 0.3s;
+}
+
+.nav-links-2 a:hover::before {
+  width: 100%;
+} */
 
 .items {
   width: 100%;
