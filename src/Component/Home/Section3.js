@@ -11,7 +11,7 @@ const CreativeRealm = () => {
             your creativity and shape your own unique experiences within our
             immersive virtual world.
           </p>
-          <a href="#" className="btn">
+          <a href="/" className="btn">
             Learn More
           </a>
         </div>
