@@ -75,7 +75,7 @@ nav {
   position: fixed;
   width: 100%;
   left: 0;
-  bottom: 0;
+  /* bottom: 0; */
   background-color: #fff;
   transition: 200ms 300ms;
   z-index: -1;
