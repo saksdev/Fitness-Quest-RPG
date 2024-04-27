@@ -13,13 +13,13 @@ function App() {
     Scrollbar.use(OverscrollPlugin);
 
     const scrollbar = Scrollbar.init(document.querySelector('#smooth'), {
-      damping: 0.01,
+      damping: 0.05,
       overscrollEffect: 'bounce',
       plugins: {
         overscroll: {
           effect: 'bounce',
-          damping: 0.1,
-          maxOverscroll: 200,
+          damping: 0.01,
+          maxOverscroll: 100,
         },
       },
     });
