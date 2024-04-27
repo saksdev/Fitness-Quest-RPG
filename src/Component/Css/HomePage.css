@@ -95,19 +95,10 @@
 }
 
 /* Section 3 */
+
 .creative-realm {
   padding: 4rem 0;
   background-color: #f8f8f8;
-}
-
-.creative-realm .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .creative-realm .content {
@@ -120,11 +111,6 @@
   margin-bottom: 1rem;
 }
 
-.creative-realm p {
-  color: #666;
-  line-height: 1.6;
-  margin-bottom: 2rem;
-}
 
 .creative-realm .btn {
   background-color: #202020;
@@ -142,6 +128,58 @@
   height: auto;
 }
 
+/* Section 4 */
+
+.fitness-quest {
+  padding: 4rem 0;
+  background-color: #f8f8f8;
+}
+
+.fitness-quest .content {
+  flex: 1 1 50%;
+  max-width: 600px;
+  padding-right: 2rem;
+}
+
+
+
+.fitness-quest .btn {
+  color: #fff;
+  background-color: #000000;
+  transition: transform 0.5s ease-in-out;
+}
+
+.fitness-quest .btn:hover {
+  transform: scale(1.1)
+}
+
+.fitness-quest .image {
+  flex: 1 1 50%;
+  max-width: 600px;
+}
+
+.fitness-quest img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .fitness-quest .container {
+    flex-direction: column;
+  }
+
+  .fitness-quest .content {
+    padding-right: 0;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+}
+
+
+
+
 
 @media screen and (max-width: 768px) {
 
@@ -153,7 +191,6 @@
   .hero-title {
     font-size: 1.875rem;
   }
-
 
   .creative-realm .container {
     flex-direction: column;

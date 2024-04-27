@@ -18,7 +18,7 @@ function App() {
       plugins: {
         overscroll: {
           effect: 'bounce',
-          damping: 0.01,
+          damping: 0.1,
           maxOverscroll: 100,
         },
       },
