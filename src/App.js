@@ -6,7 +6,6 @@ import Navigation from './Component/Navigation';
 import HomePage from './Component/HomePage';
 
 function App() {
-  const scrollbarRef = useRef(null);
   const contentRef = useRef(null);
 
   useEffect(() => {
