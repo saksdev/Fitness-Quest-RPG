@@ -1,5 +1,5 @@
 import './App.css';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import Scrollbar from 'smooth-scrollbar';
 import OverscrollPlugin from 'smooth-scrollbar/plugins/overscroll';
 import Navigation from './Component/Navigation';
