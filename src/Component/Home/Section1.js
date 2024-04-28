@@ -1,5 +1,5 @@
 import React from 'react';
-import fitnessQuestImage from '../../img/FitnessQuestRPG.svg'
+import fitnessQuestImage from '../../img/image1_0.png'
 
 const HeroSection = () => {
   return (

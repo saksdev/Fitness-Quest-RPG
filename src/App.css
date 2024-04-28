@@ -1,6 +1,17 @@
 section {
-    margin: 3rem 15px;
+    margin: 0 auto;
     height: auto;
+    max-width: 1600px;
+    padding: 3rem 1rem;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .btn {
@@ -26,18 +37,6 @@ img {
 .hidden {
     display: none;
 }
-
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-  }
-
 
 /* @media screen and (max-width: 900px) {
 

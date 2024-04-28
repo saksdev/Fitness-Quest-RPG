@@ -1,4 +1,5 @@
 import React from 'react';
+import creativity from '../../img/Creativity.png';
 
 const CreativeRealm = () => {
   return (
@@ -16,7 +17,7 @@ const CreativeRealm = () => {
           </a>
         </div>
         <div className="image">
-          <img src="creativity.jpg" alt="Creativity" />
+          <img src={creativity} alt="Creativity" />
         </div>
       </div>
     </section>
