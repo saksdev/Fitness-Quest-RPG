@@ -4,6 +4,9 @@ const FitnessQuest = () => {
   return (
     <section className="fitness-quest">
       <div className="container">
+        <div className="image">
+          <img src="fitness-quest.jpg" alt="Fitness Quest" />
+        </div>
         <div className="content">
           <h2>Embark on a Fitness Adventure</h2>
           <p>
@@ -15,9 +18,6 @@ const FitnessQuest = () => {
           <a href="/" className="btn">
             Join the Quest
           </a>
-        </div>
-        <div className="image">
-          <img src="fitness-quest.jpg" alt="Fitness Quest" />
         </div>
       </div>
     </section>
