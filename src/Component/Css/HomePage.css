@@ -24,6 +24,8 @@
 }
 
 .hero-image {
+  display: flex;
+  justify-content: center;
   flex: 1 1 50%;
 }
 
@@ -80,8 +82,7 @@
 }
 
 .feature img {
-  max-width: 80px;
-  margin-bottom: 1rem;
+  max-width: 140px;
 }
 
 .feature h3 {
@@ -110,7 +111,6 @@
 .creative-realm h2 {
   margin-bottom: 1rem;
 }
-
 
 .creative-realm .btn {
   background-color: #202020;
@@ -141,8 +141,6 @@
   padding-right: 2rem;
 }
 
-
-
 .fitness-quest .btn {
   color: #fff;
   background-color: #000000;
@@ -156,25 +154,6 @@
 .fitness-quest .image {
   flex: 1 1 50%;
   max-width: 600px;
-}
-
-.fitness-quest img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-@media (max-width: 768px) {
-  .fitness-quest .container {
-    flex-direction: column;
-  }
-
-  .fitness-quest .content {
-    padding-right: 0;
-    margin-bottom: 2rem;
-    text-align: center;
-  }
 }
 
 /* Footer.css */
@@ -256,5 +235,15 @@ footer {
   .creative-realm .content {
     padding-right: 0;
     margin-bottom: 2rem;
+  }
+
+  .fitness-quest .container {
+    flex-direction: column-reverse;
+  }
+
+  .fitness-quest .content {
+    padding-right: 0;
+    margin-bottom: 2rem;
+    text-align: center;
   }
 }

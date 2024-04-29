@@ -1,6 +1,7 @@
 section {
     margin: 0 auto;
     height: auto;
+    max-width: auto;
     max-width: 1600px;
     padding: 2rem 1rem;
 }
@@ -27,7 +28,8 @@ section {
 
 img {
     width: 100%;
-    max-width: 700px;
+    max-width: 600px;
+    /* filter: drop-shadow(10px 4px 10px orange); */
 }
 
 .txt-center {

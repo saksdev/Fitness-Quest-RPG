@@ -2,7 +2,7 @@ import './App.css';
 import { useEffect } from 'react';
 import Scrollbar from 'smooth-scrollbar';
 import OverscrollPlugin from 'smooth-scrollbar/plugins/overscroll';
-import Navigation from './Component/Navigation';
+import Navigation from '../src/Component/Navigation';
 import HomePage from './Component/HomePage';
 
 function App() {

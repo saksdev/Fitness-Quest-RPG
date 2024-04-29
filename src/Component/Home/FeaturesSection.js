@@ -1,4 +1,5 @@
 import React from 'react';
+import FitnessTracking from '../../img/FitnessTracking.png'
 
 const FeaturesSection = () => {
   return (
@@ -16,7 +17,7 @@ const FeaturesSection = () => {
             </p>
           </div>
           <div className="feature">
-            <img src="icon2.png" alt="Fitness Tracking" />
+            <img src={FitnessTracking} alt="Fitness Tracking" />
             <h3>Fitness Tracking</h3>
             <p>
               Stay motivated and monitor your progress with our advanced

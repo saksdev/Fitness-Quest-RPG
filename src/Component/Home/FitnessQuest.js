@@ -1,11 +1,12 @@
 import React from 'react';
+import FitnessQuestImg from '../../img/FitnessQuest.png';
 
 const FitnessQuest = () => {
   return (
     <section className="fitness-quest">
       <div className="container">
         <div className="image">
-          <img src="fitness-quest.jpg" alt="Fitness Quest" />
+          <img src={FitnessQuestImg} alt="Fitness Quest" />
         </div>
         <div className="content">
           <h2>Embark on a Fitness Adventure</h2>
