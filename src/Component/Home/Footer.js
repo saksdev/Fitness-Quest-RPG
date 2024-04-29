@@ -3,7 +3,7 @@ import React from 'react';
 const Footer = () => {
   return (
     <footer>
-      <div className="footer-content">
+      {/* <div className="footer-content">
         <div className="footer-section">
           <h4>Company</h4>
           <ul>
@@ -42,7 +42,7 @@ const Footer = () => {
       </div>
       <div className="footer-bottom">
         <p>&copy; {new Date().getFullYear()} Fitness Quest RPG. All rights reserved.</p>
-      </div>
+      </div> */}
     </footer>
   );
 };
