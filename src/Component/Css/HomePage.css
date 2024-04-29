@@ -29,6 +29,11 @@
   flex: 1 1 50%;
 }
 
+.hero-image img{
+  mask-image: radial-gradient(circle, black 50%, transparent 100%);
+  border-radius: 30px;
+}
+
 .cta-buttons {
   margin: 20px 0px;
 }
