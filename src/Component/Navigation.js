@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { MdCancel } from 'react-icons/md';
 import '../Component/Css/Navigation.css';
 
-
 const ResponsiveNavbar = () => {
-
   const [isVisible, setIsVisible] = useState(true);
   const handleCloseNotification = () => {
     setIsVisible(false);
@@ -19,6 +18,7 @@ const ResponsiveNavbar = () => {
   const handleResize = () => {
     setIsWideScreen(window.innerWidth >= 768);
   };
+
   useEffect(() => {
     window.addEventListener('resize', handleResize);
     return () => {
@@ -36,58 +36,66 @@ const ResponsiveNavbar = () => {
           </span>
         </div>
       )}
-
       <div className="navbar">
         <div className="navbar-brand">
-          <a href="/">
+          <Link to="/">
             <img src="/logo.png" alt="Logo" />
-          </a>
+          </Link>
         </div>
-
         {isWideScreen ? (
           <div className="navbar-menu">
             <ul className='navbar-links'>
               <li>
-                <a href="/">Home</a>
+                <Link to='/'>Home</Link>
               </li>
               <li>
-                <a href="/features">Features</a>
+                <Link to='/features'>Features</Link>
               </li>
               <li>
-                <a href="/about">About</a>
+                <Link to='/about'>About</Link>
               </li>
               <li>
-                <a href="/contact">Contact</a>
+                <Link to='/contact'>Contact</Link>
               </li>
             </ul>
             <div className="navbar-auth">
-              <a href="/login" className="btn btn-secondary">
+              <Link to='/Login' className="btn btn-secondary">
                 Log In
-              </a>
-              <a href="/signup" className="btn btn-primary">
+              </Link>
+              <Link to="/signup" className="btn btn-primary">
                 Sign Up
-              </a>
+              </Link>
             </div>
           </div>
         ) : (
           <div className="navbar-menu-2">
-            <input className="hidden" id="drawer-input" type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
+            <input
+              className="hidden"
+              id="drawer-input"
+              type="checkbox"
+              checked={isChecked}
+              onChange={handleCheckboxChange}
+            />
             <label htmlFor="drawer-input" className="drawer-open">
               <span></span>
             </label>
             {isChecked && (
               <div className="nav-links-2">
-                <a href="/">Home</a>
-                <a href="/features">Features</a>
-                <a href="/about">About</a>
-                <a href="/contact">Contact</a>
-                <a href="/login" className="btn btn-secondary">Log In</a>
-                <a href="/signup" className="btn btn-primary">Sign Up</a>
+                <Link to="/">Home</Link>
+                <Link to="/features">Features</Link>
+                <Link to="/about">About</Link>
+                <Link to="/contact">Contact</Link>
+                <Link to="/login" className="btn btn-secondary">
+                  Log In
+                </Link>
+                <Link to="/signup" className="btn btn-primary">
+                  Sign Up
+                </Link>
               </div>
             )}
           </div>
         )}
-      </div >
+      </div>
     </nav>
   );
 };
