@@ -27,7 +27,7 @@ const ResponsiveNavbar = () => {
   }, []);
 
   return (
-    <nav>
+    <header>
       {isVisible && (
         <div className="notification">
           <p>We are now in Beta!</p>
@@ -96,7 +96,7 @@ const ResponsiveNavbar = () => {
           </div>
         )}
       </div>
-    </nav>
+    </header>
   );
 };
 

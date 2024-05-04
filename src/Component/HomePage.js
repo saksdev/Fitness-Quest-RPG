@@ -1,7 +1,7 @@
-// Home Folder Css
-
+// HomePage.js
 import React from 'react';
 import './Css/HomePage.css'
+
 import Section1 from './Home/HeroSection.js';
 import Section2 from './Home/FeaturesSection.js';
 import Section3 from './Home/CreativeRealm.js';
@@ -10,7 +10,7 @@ import Footer from './Home/Footer.js';
 
 const HomePage = () => {
 	return (
-		<>
+		<>	
 			<Section1 />
 			<Section2 />
 			<Section3 />

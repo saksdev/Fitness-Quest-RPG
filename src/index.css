@@ -1,6 +1,8 @@
 :root {
   --background-color: #f4f3f3;
-  --head-font: Semakin, sans-serif
+  --head-font: Semakin, sans-serif;
+  --footer-background-color:  rgb(39, 42, 48);
+  --footer-color: rgb(141, 148, 160);
 }
 
 @font-face {
@@ -16,17 +18,12 @@ body {
   background-color: var(--background-color);
 }
 
-/* Hide Screen side scrollbar
+/* Hide Screen side scrollbar */
 *::-webkit-scrollbar {
   display: none;
-} */
+}
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
   font-family: var(--head-font);
   line-height: 140%;
 }
