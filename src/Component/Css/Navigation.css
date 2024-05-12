@@ -43,6 +43,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 40px;
   padding: 10px 20px;
   background-color: #ffffff;
 }
@@ -53,6 +54,10 @@ header {
 
 .navbar-brand img {
   height: 40px;
+}
+
+.navbar-brand a{
+  display: inline-block;
 }
 
 .navbar-menu {

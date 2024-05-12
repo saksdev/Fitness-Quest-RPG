@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Css/Login.css';
+import Logo from '../img/nav-logo.svg';
+import { FaArrowRight } from "react-icons/fa";
+import { VscAccount } from "react-icons/vsc";
+import { RiLockPasswordFill } from "react-icons/ri";
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -15,22 +19,53 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <div className="login-form">
-        <h2>Login</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
+      <div className="login-form-container">
+        <div className='login-form'>
+          <div className='login-signup-nav'>
+            <Link to='/'>
+              <img src={Logo} alt='Fitness Quest' />
+            </Link>
+            <Link to='/'>Home</Link>
           </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
-          </div>
-          <button type="submit">Login</button>
-        </form>
-        <p>
-          Don't have an account? <Link to="/signup">Sign up</Link>
-        </p>
+          <form onSubmit={handleSubmit}>
+            <h2>Sign In</h2>
+            <div className='login-input'>
+              <p>
+                Don't have an account? <Link to="/signup">Register</Link>
+              </p>
+              <div className='login-input-items'>
+                <div className='form-input'>
+                  <div className='form-icon'>
+                    <VscAccount />
+                    <input
+                      type='email'
+                      placeholder="Email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                  </div>
+                </div>
+                <div className='form-input'>
+                  <div className='form-icon'>
+                    <RiLockPasswordFill />
+                    <input
+                      type='password'
+                      placeholder="Password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+              {/* <Link to="/forgot-password" className="forgot-password">Forgot Password?</Link> */}
+              <button className='btn access-btn' type="submit">
+                Access My Account<span><FaArrowRight /></span>
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

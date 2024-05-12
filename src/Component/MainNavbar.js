@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { MdCancel } from 'react-icons/md';
+import Logo from '../img/nav-logo.svg'
 import '../Component/Css/Navigation.css';
 
 const ResponsiveNavbar = () => {
@@ -39,7 +40,7 @@ const ResponsiveNavbar = () => {
       <div className="navbar">
         <div className="navbar-brand">
           <Link to="/">
-            <img src="/logo.png" alt="Logo" />
+            <img src={Logo} alt="Logo" />
           </Link>
         </div>
         {isWideScreen ? (
