@@ -8,6 +8,9 @@ import { Routes, Route } from 'react-router-dom';
 import HomePage from './Component/HomePage';
 import Signup from './Component/Signup';
 import Login from './Component/Login';
+import Features from './Component/Features';
+import About from './Component/About';
+import Contact from './Component/Contact';
 
 function App() {
   return (
@@ -16,9 +19,9 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/features" element={<Signup />} />
-        <Route path="/about" element={<Signup />} />
-        <Route path="/contact" element={<Signup />} />
+        <Route path="/features" element={<Features />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
       {/* <SmoothScroll /> */}
     </>
