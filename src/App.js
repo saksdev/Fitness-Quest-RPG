@@ -16,6 +16,9 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/features" element={<Signup />} />
+        <Route path="/about" element={<Signup />} />
+        <Route path="/contact" element={<Signup />} />
       </Routes>
       {/* <SmoothScroll /> */}
     </>
