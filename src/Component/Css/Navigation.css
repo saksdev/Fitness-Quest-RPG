@@ -56,10 +56,6 @@ header {
   height: 40px;
 }
 
-.navbar-brand a{
-  display: inline-block;
-}
-
 .navbar-menu {
   display: flex;
   justify-content: space-between;

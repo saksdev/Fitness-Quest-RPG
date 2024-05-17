@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Css/Login.css';
 import Logo from '../img/nav-logo.svg';
@@ -9,6 +9,19 @@ import { RiLockPasswordFill } from "react-icons/ri";
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isWideScreen, setIsWideScreen] = useState(window.innerWidth >= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsWideScreen(window.innerWidth >= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,7 +38,10 @@ const Login = () => {
             <Link to='/'>
               <img src={Logo} alt='Fitness Quest' />
             </Link>
-            <Link to='/'>Home</Link>
+            <div className='nav-links'>
+              <Link to='/'>Home</Link>
+              <Link to='/'>FAQ</Link>
+            </div>
           </div>
           <form onSubmit={handleSubmit}>
             <h2>Sign In</h2>
@@ -67,6 +83,11 @@ const Login = () => {
           </form>
         </div>
       </div>
+      {isWideScreen && (
+        <div className='login-image'>
+          <h1>Image</h1>
+        </div>
+      )}
     </div>
   );
 };
