@@ -48,7 +48,7 @@ const Login = () => {
             <h2>Sign In</h2>
             <div className='login-input'>
               <p>
-                Don't have an account? <Link to="/signup">Register</Link>
+                <b>Don't have an account?</b><mark><Link to="/signup">Register</Link></mark>
               </p>
               <div className='login-input-items'>
                 <div className='form-input'>
@@ -76,7 +76,7 @@ const Login = () => {
                   </div>
                 </div>
               </div>
-              {/* <Link to="/forgot-password" className="forgot-password">Forgot Password?</Link> */}
+              <Link to="/forgot-password" className="forgot-password">Forgot Password?</Link>
               <button className='btn access-btn' type="submit">
                 Access My Account<span><FaArrowRight /></span>
               </button>

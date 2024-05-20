@@ -11,6 +11,7 @@ import Login from './Component/Login';
 import Features from './Component/Features';
 import About from './Component/About';
 import Contact from './Component/Contact';
+import NotFound from './Component/NotFound';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/features" element={<Features />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       {/* <SmoothScroll /> */}
     </>

@@ -34,45 +34,49 @@
 }
 
 .login-container form {
+	height: 100%;
 	display: flex;
 	gap: 7vw;
-	justify-content: center;
+	padding: 0px 20px;
+	justify-content: flex-start;
 	align-content: center;
 	flex-wrap: nowrap;
 	flex-direction: column;
 }
 
 .login-input {
+	margin-top: 50px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
 
 .login-input-items {
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
-	margin-bottom: 40px;
+	margin-bottom: 20px;
 }
 
 input {
-	height: 35px;
+	height: 42px;
 	padding-left: 35px;
 	border-radius: 12px;
 	border: 0.1px solid black;
-	width: 100%;
-	max-width: 300px;
+	width: 90%;
+	background-color: #f3eaea;
 }
 
 .form-icon {
-	display: flex;
-	align-items: center;
-	flex-wrap: nowrap;
+	position: relative;
+	width: 100%;
 }
 
 .form-icon svg {
 	position: absolute;
 	padding-left: 10px;
+	padding-top: 11px;
 	width: 20px;
 	height: 20px;
 }
@@ -100,7 +104,10 @@ input {
 }
 
 .form-input {
-	min-width: 100%;
+	/* min-width: 100%; */
+	width: 100%;
+    max-width: 500px; /* Adjust this value to set the maximum width of the input boxes */
+    margin: 0 auto; 
 }
 
 .form-group input {
@@ -108,6 +115,8 @@ input {
 	padding: 0.8rem 0.5rem;
 	border: 1px solid #ccc;
 	border-radius: 4px;
+	width: 100%; /* Make the input boxes take up the full width of their parent container */
+    box-sizing: border-box;
 }
 
 .form-group input::placeholder {
@@ -115,13 +124,11 @@ input {
 }
 
 .forgot-password {
-	position: absolute;
-	right: 0.5rem;
-	top: 50%;
-	transform: translateY(-50%);
-	color: #007bff;
-	text-decoration: none;
-	font-size: 0.9rem;
+	width: 100%;
+    color: #007bff;
+    text-decoration: none;
+    font-size: 0.9rem;
+	margin-bottom: 20px;
 }
 
 .forgot-password:hover {
@@ -131,6 +138,9 @@ input {
 .login-container p {
 	text-align: center;
 	margin-top: 1rem;
+	width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
 
 .login-container p a {
@@ -173,7 +183,7 @@ input {
 	.login-signup-nav {
 		display: grid;
 		grid-template-columns: auto 1fr;
-		padding: 10px 40px;
+		padding: 10px 20px;
 		border-bottom: 1px solid black;
 		background-color: #e2e8f0;
 	}
@@ -181,6 +191,12 @@ input {
 	.nav-links {
 		display: flex;
 		justify-content: flex-end;
-        gap: 15vw;
+        gap: 10vw;
 	}
+
+	.login-form h2 {
+		margin: 0;
+		margin-top: 6rem;
+		
+	}	
 }

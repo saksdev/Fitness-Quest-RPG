@@ -1,8 +1,12 @@
 import React from 'react'
+import Navigation from './MainNavbar.js';
 
 function About() {
   return (
-	<div>About</div>
+    <>
+      <Navigation />
+      <div>About</div>
+    </>
   )
 }
 
