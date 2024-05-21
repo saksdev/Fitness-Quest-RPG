@@ -40,6 +40,7 @@
 	display: flex;
 	gap: 7vw;
 	padding: 0px 20px;
+	padding-bottom: 40px;
 	justify-content: flex-start;
 	align-content: center;
 	flex-wrap: nowrap;
@@ -108,8 +109,9 @@ input {
 .form-input {
 	/* min-width: 100%; */
 	width: 100%;
-    max-width: 500px; /* Adjust this value to set the maximum width of the input boxes */
-    margin: 0 auto; 
+	max-width: 500px;
+	/* Adjust this value to set the maximum width of the input boxes */
+	margin: 0 auto;
 }
 
 .form-group input {
@@ -117,8 +119,9 @@ input {
 	padding: 0.8rem 0.5rem;
 	border: 1px solid #ccc;
 	border-radius: 4px;
-	width: 100%; /* Make the input boxes take up the full width of their parent container */
-    box-sizing: border-box;
+	width: 100%;
+	/* Make the input boxes take up the full width of their parent container */
+	box-sizing: border-box;
 }
 
 .form-group input::placeholder {
@@ -128,9 +131,9 @@ input {
 .forgot-password {
 	width: 100%;
 	max-width: 500px;
-    color: #007bff;
-    text-decoration: none;
-    font-size: 0.9rem;
+	color: #007bff;
+	text-decoration: none;
+	font-size: 0.9rem;
 	margin-bottom: 50px;
 }
 
@@ -140,21 +143,24 @@ input {
 
 .login-container p {
 	text-align: center;
-	margin-top: 1rem;
 	width: 100%;
-    display: flex;
-    justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 	max-width: 500px;
 }
 
 .login-container p a {
-	color: #007bff;
-	text-decoration: none;
+	color: black;
+    background-color: yellow;
+    border-radius: 10px;
+    padding: 1px 5px;
+    text-decoration: none;
 }
 
-mark a{
+mark a {
 	color: #1b1a1a !important;
-    font-weight: bold;
+	font-weight: bold;
 }
 
 .login-container p a:hover {
@@ -182,6 +188,22 @@ mark a{
 	gap: 30px;
 }
 
+@media screen and (max-width: 1000px) {
+	.login-container{
+		grid-template-columns: 2.3fr 3fr;
+	}
+}
+
+@media screen and (max-width: 920px) {
+	.login-container{
+		grid-template-columns: 55fr 65fr;
+	}
+	.login-input p {
+		font-size: 14px;
+	}
+
+}
+
 @media screen and (max-width: 768px) {
 	.login-form-container {
 		width: 100%;
@@ -206,12 +228,16 @@ mark a{
 	}
 
 	.nav-links {
-        gap: 10vw;
+		gap: 10vw;
 	}
 
 	.login-form h2 {
 		margin: 0;
 		margin-top: 6rem;
-		
-	}	
+
+	}
+
+	.login-input p {
+		font-size: 16px;
+	}
 }

@@ -48,7 +48,7 @@ const Login = () => {
             <h2>Sign In</h2>
             <div className='login-input'>
               <p>
-                <b>Don't have an account?</b><mark><Link to="/signup">Register</Link></mark>
+                <b>Don't have an account?</b><Link to="/signup">Register</Link>
               </p>
               <div className='login-input-items'>
                 <div className='form-input'>
