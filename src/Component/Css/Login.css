@@ -125,10 +125,11 @@ input {
 
 .forgot-password {
 	width: 100%;
+	max-width: 500px;
     color: #007bff;
     text-decoration: none;
     font-size: 0.9rem;
-	margin-bottom: 20px;
+	margin-bottom: 50px;
 }
 
 .forgot-password:hover {
@@ -141,11 +142,17 @@ input {
 	width: 100%;
     display: flex;
     justify-content: space-between;
+	max-width: 500px;
 }
 
 .login-container p a {
 	color: #007bff;
 	text-decoration: none;
+}
+
+mark a{
+	color: #1b1a1a !important;
+    font-weight: bold;
 }
 
 .login-container p a:hover {
