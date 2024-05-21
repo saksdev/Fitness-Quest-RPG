@@ -38,7 +38,7 @@
 .login-container form {
 	height: 100%;
 	display: flex;
-	gap: 7vw;
+	gap: 7rem;
 	padding: 0px 20px;
 	justify-content: flex-start;
 	align-content: center;
@@ -203,7 +203,7 @@ mark a {
 
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 769px) {
 	.login-form-container {
 		width: 100%;
 	}

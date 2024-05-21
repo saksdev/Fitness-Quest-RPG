@@ -10,7 +10,7 @@ import { RiLockPasswordFill } from "react-icons/ri";
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isWideScreen, setIsWideScreen] = useState(window.innerWidth >= 768);
+  const [isWideScreen, setIsWideScreen] = useState(window.innerWidth >= 769);
 
   useEffect(() => {
     const handleResize = () => {
