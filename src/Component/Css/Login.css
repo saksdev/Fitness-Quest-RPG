@@ -1,6 +1,7 @@
 .login-container {
 	height: 100%;
 	width: 100%;
+	min-height: 100vh;
 	display: grid;
 	grid-template-columns: 35fr 65fr;
 	overflow: hidden;
@@ -8,7 +9,7 @@
 
 .login-form-container {
 	width: 100%;
-	height: 100vh;
+	height: 100%;
 	border: 1px solid black;
 	display: flex;
 	flex-direction: column;
@@ -17,12 +18,13 @@
 
 
 .login-form {
+	padding: 20px 2vw 0px 2vw;
 	height: 100%;
 	width: auto;
 	display: grid;
-	justify-content: center;
 	align-items: center;
 	grid-template-rows: auto 1fr;
+	gap: 5vw;
 }
 
 .login-image {
@@ -45,7 +47,6 @@
 }
 
 .login-input {
-	margin-top: 50px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -83,6 +84,7 @@ input {
 
 
 .login-signup-nav {
+	padding: 10px 15px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -174,6 +176,12 @@ mark a{
 	object-fit: contain;
 }
 
+.nav-links {
+	display: flex;
+	justify-content: flex-end;
+	gap: 30px;
+}
+
 @media screen and (max-width: 768px) {
 	.login-form-container {
 		width: 100%;
@@ -185,6 +193,8 @@ mark a{
 
 	.login-form {
 		justify-content: stretch;
+		padding: 0px;
+		gap: 0;
 	}
 
 	.login-signup-nav {
@@ -196,8 +206,6 @@ mark a{
 	}
 
 	.nav-links {
-		display: flex;
-		justify-content: flex-end;
         gap: 10vw;
 	}
 
