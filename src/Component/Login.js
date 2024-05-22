@@ -6,11 +6,19 @@ import Logo from '../img/nav-logo.svg';
 import { FaArrowRight } from "react-icons/fa";
 import { VscAccount } from "react-icons/vsc";
 import { RiLockPasswordFill } from "react-icons/ri";
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
+import { DiJava } from 'react-icons/di';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [Eye, setEye] = useState(true);
   const [isWideScreen, setIsWideScreen] = useState(window.innerWidth >= 769);
+
+  const EyeChangereq = () => {
+    setEye(!Eye);
+  }
 
   useEffect(() => {
     const handleResize = () => {
@@ -32,10 +40,10 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      <div className="login-form-container">
-        <div className='login-form'>
-          <div className='login-signup-nav'>
+    <div className="auth-container">
+      <div className="auth-form-container">
+        <div className='auth-form'>
+          <div className='auth-nav'>
             <Link to='/'>
               <img src={Logo} alt='Fitness Quest' />
             </Link>
@@ -67,12 +75,17 @@ const Login = () => {
                   <div className='form-icon'>
                     <RiLockPasswordFill />
                     <input
-                      type='password'
+                      type={Eye ? "password" : "text"}
                       placeholder="Password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       required
                     />
+                    {Eye ? (
+                      <FaEye className='Eyechange' onClick={EyeChangereq} />
+                    ) : (
+                      <FaEyeSlash className='Eyechange' onClick={EyeChangereq} />
+                    )}
                   </div>
                 </div>
               </div>
@@ -85,7 +98,7 @@ const Login = () => {
         </div>
       </div>
       {isWideScreen && (
-        <div className='login-image'>
+        <div className='auth-image'>
           <h1>Image</h1>
         </div>
       )}
