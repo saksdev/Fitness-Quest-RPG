@@ -34,7 +34,7 @@
     align-items: center;
 }
 
-.auth-container form {
+.auth {
     height: 100%;
     display: flex;
     gap: 4rem;
@@ -209,7 +209,7 @@ mark a {
         grid-template-columns: 2.3fr 3fr;
     }
 
-    .auth-container form {
+    .auth {
         gap: 7rem;
     }
 }
@@ -233,7 +233,7 @@ mark a {
         grid-template-columns: 1fr;
     }
 
-    .auth-container form {
+    .auth {
         gap: 5rem;
     }
 
@@ -256,7 +256,7 @@ mark a {
         gap: 10vw;
     }
 
-    .auth-form2 {
+    .auth-form h2 {
         margin: 0;
         margin-top: 6rem;
     }

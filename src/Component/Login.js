@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import './Css/Login.css';
+import './Css/auth.css';
 import Logo from '../img/nav-logo.svg';
 import { FaArrowRight } from "react-icons/fa";
-import { VscAccount } from "react-icons/vsc";
+import { MdMarkEmailUnread } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
-import { DiJava } from 'react-icons/di';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  
   const [Eye, setEye] = useState(true);
   const [isWideScreen, setIsWideScreen] = useState(window.innerWidth >= 769);
 
@@ -34,7 +34,6 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle login logic here
     console.log('Email:', email);
     console.log('Password:', password);
   };
@@ -52,49 +51,51 @@ const Login = () => {
               <Link to='/'>FAQ</Link>
             </div>
           </div>
-          <form onSubmit={handleSubmit}>
+          <div className='auth'>
             <h2>Sign In</h2>
-            <div className='login-input'>
-              <p>
-                <b>Don't have an account?</b><Link to="/signup">Register</Link>
-              </p>
-              <div className='login-input-items'>
-                <div className='form-input'>
-                  <div className='form-icon'>
-                    <VscAccount />
-                    <input
-                      type='email'
-                      placeholder="Email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                    />
+            <form onSubmit={handleSubmit}>
+              <div className='login-input'>
+                <p>
+                  <b>Don't have an account?</b><Link to="/signup">Register</Link>
+                </p>
+                <div className='login-input-items'>
+                  <div className='form-input'>
+                    <div className='form-icon'>
+                    <MdMarkEmailUnread />
+                      <input
+                        type='email'
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div className='form-input'>
+                    <div className='form-icon'>
+                      <RiLockPasswordFill />
+                      <input
+                        type={Eye ? "password" : "text"}
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                      />
+                      {Eye ? (
+                        <FaEye className='Eyechange' onClick={EyeChangereq} />
+                      ) : (
+                        <FaEyeSlash className='Eyechange' onClick={EyeChangereq} />
+                      )}
+                    </div>
                   </div>
                 </div>
-                <div className='form-input'>
-                  <div className='form-icon'>
-                    <RiLockPasswordFill />
-                    <input
-                      type={Eye ? "password" : "text"}
-                      placeholder="Password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      required
-                    />
-                    {Eye ? (
-                      <FaEye className='Eyechange' onClick={EyeChangereq} />
-                    ) : (
-                      <FaEyeSlash className='Eyechange' onClick={EyeChangereq} />
-                    )}
-                  </div>
-                </div>
+                <Link to="/forgot-password" className="forgot-password">Forgot Password?</Link>
+                <button className='btn access-btn' type="submit">
+                  Access My Account<span><FaArrowRight /></span>
+                </button>
               </div>
-              <Link to="/forgot-password" className="forgot-password">Forgot Password?</Link>
-              <button className='btn access-btn' type="submit">
-                Access My Account<span><FaArrowRight /></span>
-              </button>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
       {isWideScreen && (
