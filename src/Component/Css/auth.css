@@ -204,6 +204,12 @@ mark a {
     gap: 30px;
 }
 
+.Form-error{
+    color: red;
+    font-size: 12px !important;
+    margin: 2px 0px 0px 0px;
+}
+
 @media screen and (max-width: 1000px) {
     .auth-container {
         grid-template-columns: 2.3fr 3fr;

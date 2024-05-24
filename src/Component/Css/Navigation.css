@@ -91,7 +91,7 @@ header {
   gap: 3rem;
   transition: all 500ms cubic-bezier(.10, .0, .80, .0);
   height: calc(-90px + 100vh);
-  padding-top: 60px;
+  padding: 20px 0px 40px 0px;
 }
 
 .nav-links-2 a {
