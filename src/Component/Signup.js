@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import './Css/auth.css';
 import Logo from '../img/nav-logo.svg';
 
+import { FaArrowRight } from "react-icons/fa";
 import { FaUserAlt } from "react-icons/fa";
 import { MdMarkEmailUnread } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
@@ -152,7 +153,9 @@ const Signup = () => {
                     {errors.confirm_password && touched.confirm_password ? <p className='Form-error'>{errors.confirm_password}</p> : null}
                   </div>
                 </div>
-                <button className='btn access-btn' type="submit">Sign Up</button>
+                <button className='btn access-btn' type="submit">
+                  Sign Up<span><FaArrowRight /></span>
+                </button>
               </div>
             </form>
           </div>

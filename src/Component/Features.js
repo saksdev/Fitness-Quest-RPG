@@ -1,8 +1,12 @@
 import React from 'react'
+import Navigation from './MainNavbar.js';
 
 function Features() {
   return (
-	<div>Features</div>
+    <>
+      <Navigation />
+      <div>Features</div>
+    </>
   )
 }
 

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useFormik } from 'formik';
+import * as Yup from "yup";
 
 import './Css/auth.css';
 import Logo from '../img/nav-logo.svg';
@@ -10,14 +12,32 @@ import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  
-  const [Eye, setEye] = useState(true);
+  const initialValues = {
+    email: "",
+    password: ""
+  };
+
+  const LoginSchema = Yup.object({
+    email: Yup.string().email().required("Email is required"),
+    password: Yup.string().required("This is required")
+  });
+
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
+    initialValues: initialValues,
+    validationSchema: LoginSchema,
+    onSubmit: (values, action) => {
+      console.log(values);
+      action.resetForm();
+    }
+  });
+
+
+  const [showPassword, setShowPassword] = useState(true);
   const [isWideScreen, setIsWideScreen] = useState(window.innerWidth >= 769);
 
-  const EyeChangereq = () => {
-    setEye(!Eye);
+  const ShowPassword = (e) => {
+    console.log(e);
+    setShowPassword(!showPassword);
   }
 
   useEffect(() => {
@@ -31,12 +51,6 @@ const Login = () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Email:', email);
-    console.log('Password:', password);
-  };
 
   return (
     <div className="auth-container">
@@ -59,34 +73,42 @@ const Login = () => {
                   <b>Don't have an account?</b><Link to="/signup">Register</Link>
                 </p>
                 <div className='login-input-items'>
-                  <div className='form-input'>
-                    <div className='form-icon'>
-                    <MdMarkEmailUnread />
-                      <input
-                        type='email'
-                        placeholder="Email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                      />
+                  <div>
+                    <div className='form-input'>
+                      <div className='form-icon'>
+                        <MdMarkEmailUnread />
+                        <input
+                          type='email'
+                          placeholder="Email"
+                          name='email'
+                          value={values.email}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                        />
+                      </div>
                     </div>
+                    {errors.email && touched.email ? <p className='Form-error'>{errors.email}</p> : null}
                   </div>
-                  <div className='form-input'>
-                    <div className='form-icon'>
-                      <RiLockPasswordFill />
-                      <input
-                        type={Eye ? "password" : "text"}
-                        placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                      />
-                      {Eye ? (
-                        <FaEye className='Eyechange' onClick={EyeChangereq} />
-                      ) : (
-                        <FaEyeSlash className='Eyechange' onClick={EyeChangereq} />
-                      )}
+                  <div>
+                    <div className='form-input'>
+                      <div className='form-icon'>
+                        <RiLockPasswordFill />
+                        <input
+                          type={showPassword ? "password" : "text"}
+                          placeholder="Password"
+                          name='password'
+                          value={values.password}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                        />
+                        {showPassword ? (
+                          <FaEyeSlash className='Eyechange' onClick={ShowPassword} />
+                        ) : (
+                          <FaEye className='Eyechange' onClick={ShowPassword} />
+                        )}
+                      </div>
                     </div>
+                    {errors.password && touched.password ? <p className='Form-error'>{errors.password}</p> : null}
                   </div>
                 </div>
                 <Link to="/forgot-password" className="forgot-password">Forgot Password?</Link>

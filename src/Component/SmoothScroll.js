@@ -1,15 +1,3 @@
-import React from 'react'
-
-function SmoothScroll() {
-  return (
-    <div>SmoothScroll</div>
-  )
-}
-
-export default SmoothScroll
-
-
-
 // import React, { useEffect, useRef } from 'react';
 // import Scrollbar from 'smooth-scrollbar';
 
