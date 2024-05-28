@@ -5,6 +5,7 @@ import * as Yup from "yup";
 
 import './Css/auth.css';
 import Logo from '../img/nav-logo.svg';
+import LoginImg from "../img/Login-img.jpg";
 import { FaArrowRight } from "react-icons/fa";
 import { MdMarkEmailUnread } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
@@ -122,7 +123,7 @@ const Login = () => {
       </div>
       {isWideScreen && (
         <div className='auth-image'>
-          <h1>Image</h1>
+          <img src={LoginImg} alt="Login Image" />
         </div>
       )}
     </div>

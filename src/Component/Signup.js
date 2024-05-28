@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from "yup";
 import './Css/auth.css';
+
 import Logo from '../img/nav-logo.svg';
+import SignupImg from "../img/Signup-img.jpg";
 
 import { FaArrowRight } from "react-icons/fa";
 import { FaUserAlt } from "react-icons/fa";
@@ -163,7 +165,7 @@ const Signup = () => {
       </div>
       {isWideScreen && (
         <div className='auth-image'>
-          <h1>Image</h1>
+            <img src={SignupImg} alt="Signup Image" />
         </div>
       )}
     </div>
