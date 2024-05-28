@@ -83,7 +83,7 @@ const Signup = () => {
                   <div>
                     <div className="form-input">
                       <div className="form-icon">
-                        <FaUserAlt />
+                        <FaUserAlt className='form-icon-img'/>
                         <input
                           type="text"
                           placeholder="Name"
@@ -99,7 +99,7 @@ const Signup = () => {
                   <div>
                     <div className="form-input">
                       <div className="form-icon">
-                        <MdMarkEmailUnread />
+                        <MdMarkEmailUnread className='form-icon-img'/>
                         <input
                           type="email"
                           placeholder="Email"
@@ -115,7 +115,7 @@ const Signup = () => {
                   <div>
                     <div className="form-input">
                       <div className="form-icon">
-                        <RiLockPasswordFill />
+                        <RiLockPasswordFill className='form-icon-img'/>
                         <input
                           type={showPassword ? "text" : "password"}
                           placeholder="Password"
@@ -136,7 +136,7 @@ const Signup = () => {
                   <div>
                     <div className="form-input">
                       <div className="form-icon">
-                        <RiLockPasswordFill />
+                        <RiLockPasswordFill className='form-icon-img'/>
                         <input
                           type={showConfirmPassword ? "text" : "password"}
                           placeholder="Confirm Password"
@@ -165,7 +165,7 @@ const Signup = () => {
       </div>
       {isWideScreen && (
         <div className='auth-image'>
-            <img src={SignupImg} alt="Signup Image" />
+            <img src={SignupImg} alt="Signup"/>
         </div>
       )}
     </div>

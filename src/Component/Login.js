@@ -77,7 +77,7 @@ const Login = () => {
                   <div>
                     <div className='form-input'>
                       <div className='form-icon'>
-                        <MdMarkEmailUnread />
+                        <MdMarkEmailUnread className='form-icon-img'/>
                         <input
                           type='email'
                           placeholder="Email"
@@ -93,7 +93,7 @@ const Login = () => {
                   <div>
                     <div className='form-input'>
                       <div className='form-icon'>
-                        <RiLockPasswordFill />
+                        <RiLockPasswordFill className='form-icon-img' />
                         <input
                           type={showPassword ? "password" : "text"}
                           placeholder="Password"
@@ -112,7 +112,9 @@ const Login = () => {
                     {errors.password && touched.password ? <p className='Form-error'>{errors.password}</p> : null}
                   </div>
                 </div>
-                <Link to="/forgot-password" className="forgot-password">Forgot Password?</Link>
+                <span className="forgot-password">
+                  <Link to="/forgot-password">Forgot Password?</Link>
+                </span>
                 <button className='btn access-btn' type="submit">
                   Access My Account<span><FaArrowRight /></span>
                 </button>
@@ -123,7 +125,7 @@ const Login = () => {
       </div>
       {isWideScreen && (
         <div className='auth-image'>
-          <img src={LoginImg} alt="Login Image" />
+          <img src={LoginImg} alt="Login" />
         </div>
       )}
     </div>
