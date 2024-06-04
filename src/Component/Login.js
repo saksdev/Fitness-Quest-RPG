@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from "yup";
+import toast, { Toaster } from 'react-hot-toast';
 
 import './Css/auth.css';
 import Logo from '../img/nav-logo.svg';
 import LoginImg from "../img/Login-img.jpg";
-import { FaArrowRight } from "react-icons/fa";
 import { MdMarkEmailUnread } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const initialValues = {
     email: "",
     password: ""
@@ -26,18 +28,38 @@ const Login = () => {
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
     initialValues: initialValues,
     validationSchema: LoginSchema,
-    onSubmit: (values, action) => {
-      console.log(values);
+    onSubmit: async (values, action) => {
+      // console.log(values);
+      try {
+        const Loginresponse = await fetch('http://localhost:3000/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(values),
+        });
+
+        if (Loginresponse.ok) {
+          const data = await Loginresponse.json();
+          console.log('Login successful:', data);
+          toast.success("Login successful")
+          navigate('/dashboard');
+        } else {
+          // const errorData = await Loginresponse.json(); // Removed since it is not used
+          toast.error('Login failed. Please check your credentials.');
+        }
+      } catch (error) {
+        // console.error('Error:', error);
+        toast.error('An error occurred during login');
+      }
       action.resetForm();
     }
   });
-
 
   const [showPassword, setShowPassword] = useState(true);
   const [isWideScreen, setIsWideScreen] = useState(window.innerWidth >= 769);
 
   const ShowPassword = (e) => {
-    console.log(e);
     setShowPassword(!showPassword);
   }
 
@@ -55,6 +77,7 @@ const Login = () => {
 
   return (
     <div className="auth-container">
+      <Toaster position="top-right" reverseOrder={false} />
       <div className="auth-form-container">
         <div className='auth-form'>
           <div className='auth-nav'>
@@ -116,7 +139,7 @@ const Login = () => {
                   <Link to="/forgot-password">Forgot Password?</Link>
                 </span>
                 <button className='btn access-btn' type="submit">
-                  Access My Account<span><FaArrowRight /></span>
+                  Access My Account
                 </button>
               </div>
             </form>

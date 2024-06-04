@@ -70,7 +70,7 @@
 .login-input-items svg{
     width: 20px;
     height: 20px;
-    -webkit-user-select: none;
+    user-select: none;
 }
 
 input {
@@ -114,7 +114,9 @@ input::-ms-clear {
 .access-btn {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
+    min-width: 122px;
 }
 
 .auth-form h2 {
@@ -218,6 +220,7 @@ mark a {
 }
 
 .Form-error {
+    margin: 0 auto !important;
     color: red;
     font-size: 12px !important;
     margin: 2px 0px 0px 0px;

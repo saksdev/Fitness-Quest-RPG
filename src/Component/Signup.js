@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from "yup";
+import toast, { Toaster } from 'react-hot-toast';
+import { ClipLoader } from 'react-spinners';
 import './Css/auth.css';
 
 import Logo from '../img/nav-logo.svg';
 import SignupImg from "../img/Signup-img.jpg";
 
-import { FaArrowRight } from "react-icons/fa";
 import { FaUserAlt } from "react-icons/fa";
 import { MdMarkEmailUnread } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
@@ -17,6 +18,7 @@ import { FaEyeSlash } from "react-icons/fa";
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const ShowPassword = () => {
     setShowPassword(!showPassword);
@@ -40,27 +42,53 @@ const Signup = () => {
     name: "",
     email: "",
     password: "",
-    confirm_password: ""
+    confirmPassword: ""
   };
 
   const SignupSchema = Yup.object({
     name: Yup.string().min(2).max(25).required("Name is required"),
     email: Yup.string().email().required("Email is required"),
     password: Yup.string().min(8).required("This is required"),
-    confirm_password: Yup.string().required().oneOf([Yup.ref("password"), null], "Your passwords does not match")
+    confirmPassword: Yup.string().required().oneOf([Yup.ref("password"), null], "Your passwords do not match")
   });
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
     initialValues: initialValues,
     validationSchema: SignupSchema,
     onSubmit: (values, action) => {
-      console.log(values);
-      action.resetForm();
-    }
+      setIsSubmitting(true);
+      fetch('http://localhost:3000/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.message.status === 201) {
+            toast.success(data.message.message);
+            action.resetForm();
+            setTimeout(() => {
+              window.location.href = "/login";
+            }, 3000);
+          } else {
+            toast.error(data.message.message);
+          }
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+          toast.error('An error occurred. Please try again later.');
+        })
+        .finally(() => {
+          setIsSubmitting(false);
+        });
+    },
   });
 
   return (
     <div className="auth-container">
+      <Toaster position="top-right" reverseOrder={false} />
       <div className="auth-form-container">
         <div className="auth-form">
           <div className="auth-nav">
@@ -83,7 +111,7 @@ const Signup = () => {
                   <div>
                     <div className="form-input">
                       <div className="form-icon">
-                        <FaUserAlt className='form-icon-img'/>
+                        <FaUserAlt className='form-icon-img' />
                         <input
                           type="text"
                           placeholder="Name"
@@ -99,7 +127,7 @@ const Signup = () => {
                   <div>
                     <div className="form-input">
                       <div className="form-icon">
-                        <MdMarkEmailUnread className='form-icon-img'/>
+                        <MdMarkEmailUnread className='form-icon-img' />
                         <input
                           type="email"
                           placeholder="Email"
@@ -115,7 +143,7 @@ const Signup = () => {
                   <div>
                     <div className="form-input">
                       <div className="form-icon">
-                        <RiLockPasswordFill className='form-icon-img'/>
+                        <RiLockPasswordFill className='form-icon-img' />
                         <input
                           type={showPassword ? "text" : "password"}
                           placeholder="Password"
@@ -136,12 +164,12 @@ const Signup = () => {
                   <div>
                     <div className="form-input">
                       <div className="form-icon">
-                        <RiLockPasswordFill className='form-icon-img'/>
+                        <RiLockPasswordFill className='form-icon-img' />
                         <input
                           type={showConfirmPassword ? "text" : "password"}
                           placeholder="Confirm Password"
-                          name='confirm_password'
-                          value={values.confirm_password}
+                          name='confirmPassword'
+                          value={values.confirmPassword}
                           onChange={handleChange}
                           onBlur={handleBlur}
                         />
@@ -152,11 +180,11 @@ const Signup = () => {
                         )}
                       </div>
                     </div>
-                    {errors.confirm_password && touched.confirm_password ? <p className='Form-error'>{errors.confirm_password}</p> : null}
+                    {errors.confirmPassword && touched.confirmPassword ? <p className='Form-error'>{errors.confirmPassword}</p> : null}
                   </div>
                 </div>
-                <button className='btn access-btn' type="submit">
-                  Sign Up<span><FaArrowRight /></span>
+                <button className='btn btn-primary access-btn' type="submit" disabled={isSubmitting}>
+                  {isSubmitting ? <ClipLoader size={15} color={"#fff"} /> : 'Sign Up'}
                 </button>
               </div>
             </form>
@@ -165,7 +193,7 @@ const Signup = () => {
       </div>
       {isWideScreen && (
         <div className='auth-image'>
-            <img src={SignupImg} alt="Signup"/>
+          <img src={SignupImg} alt="Signup" />
         </div>
       )}
     </div>

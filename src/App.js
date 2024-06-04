@@ -13,6 +13,8 @@ import About from './Component/About';
 import Contact from './Component/Contact';
 import NotFound from './Component/NotFound';
 
+// import Test from './Component/test';
+
 function App() {
   return (
     <>
@@ -25,7 +27,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      {/* <SmoothScroll /> */}
+      {/* <Test /> */}
     </>
   );
 }
