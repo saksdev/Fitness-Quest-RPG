@@ -12,7 +12,7 @@ import { MdMarkEmailUnread } from 'react-icons/md';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
-const Login = () => {
+const Login = ({ setIsAuthenticated  }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
@@ -55,11 +55,13 @@ const Login = () => {
           },
           body: JSON.stringify(values)
         });
-
+    
         const data = await Loginresponse.json();
         if (Loginresponse.ok) {
           toast.success(data.message);
           localStorage.setItem('token', data.token); // Store token in localStorage
+          localStorage.setItem('userData', JSON.stringify(data.user)); // Store user data in localStorage
+          setIsAuthenticated(true); // Set the authentication state to true
           resetForm();
           navigate('/dashboard');
         } else {
@@ -71,6 +73,7 @@ const Login = () => {
         setIsSubmitting(false);
       }
     }
+    
   });
 
   return (
