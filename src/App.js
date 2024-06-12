@@ -9,7 +9,7 @@ import Features from './Component/Features';
 import About from './Component/About';
 import Contact from './Component/Contact';
 import NotFound from './Component/NotFound';
-import Dashboard from './Component/Dashboard';
+import Dashboard from './Component/UserDashboard';
 
 import ProtectedRoute from './Component/Tools/PrivateRoute';
 
