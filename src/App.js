@@ -1,4 +1,4 @@
-// app.js
+// src/App.js
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
@@ -14,20 +14,13 @@ import Dashboard from './Component/UserDashboard.js';
 
 import ProtectedRoute from './Component/Tools/PrivateRoute.js';
 
-function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+function App() {
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if (token) {
-      const expiryTime = localStorage.getItem('expiryTime');
-      if (expiryTime && new Date().getTime() < new Date(expiryTime).getTime()) {
-        setIsAuthenticated(true);
-      } else {
-        localStorage.removeItem('token');
-        localStorage.removeItem('expiryTime');
-      }
-    }
+    setIsAuthenticated(!!token);
   }, []);
 
   return (
