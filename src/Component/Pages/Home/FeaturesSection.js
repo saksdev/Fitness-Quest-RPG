@@ -1,5 +1,5 @@
 import React from 'react';
-import FitnessTracking from '../../img/FitnessTracking.png'
+import FitnessTracking from '../../../img/FitnessTracking.png'
 
 const FeaturesSection = () => {
   return (

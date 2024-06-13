@@ -1,5 +1,5 @@
 import React from 'react';
-import FitnessQuestImg from '../../img/FitnessQuest.png';
+import FitnessQuestImg from '../../../img/FitnessQuest.png';
 
 const FitnessQuest = () => {
   return (

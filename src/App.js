@@ -1,25 +1,33 @@
+// app.js
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
 import { Routes, Route } from 'react-router-dom';
-import HomePage from './Component/HomePage';
-import Signup from './Component/Signup';
-import Login from './Component/Login';
-import Features from './Component/Features';
-import About from './Component/About';
-import Contact from './Component/Contact';
-import NotFound from './Component/NotFound';
-import Dashboard from './Component/UserDashboard';
+import HomePage from './Component/Pages/HomePage.js';
+import Signup from './Component/Signup.js';
+import Login from './Component/Login.js';
+import Features from './Component/Pages/Features.js';
+import About from './Component/Pages/About.js';
+import Contact from './Component/Pages/Contact.js';
+import NotFound from './Component/Pages/NotFound.js';
+import Dashboard from './Component/UserDashboard.js';
 
-import ProtectedRoute from './Component/Tools/PrivateRoute';
+import ProtectedRoute from './Component/Tools/PrivateRoute.js';
 
 function App() {
-  // const [user, setUser] = useState(null);
-
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   useEffect(() => {
     const token = localStorage.getItem('token');
-    setIsAuthenticated(!!token);
+    if (token) {
+      const expiryTime = localStorage.getItem('expiryTime');
+      if (expiryTime && new Date().getTime() < new Date(expiryTime).getTime()) {
+        setIsAuthenticated(true);
+      } else {
+        localStorage.removeItem('token');
+        localStorage.removeItem('expiryTime');
+      }
+    }
   }, []);
 
   return (

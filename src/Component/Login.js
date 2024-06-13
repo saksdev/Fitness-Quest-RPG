@@ -1,9 +1,10 @@
+// Login.js
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import toast, { Toaster } from 'react-hot-toast';
-import ClipLoader from 'react-spinners/ClipLoader';
+import ClipLoader from 'react-spinners/ClipLoader.js';
 
 import './Css/auth.css';
 import Logo from '../img/nav-logo.svg';
@@ -59,8 +60,10 @@ const Login = ({ setIsAuthenticated }) => {
         const data = await Loginresponse.json();
         if (Loginresponse.ok) {
           toast.success(data.message);
-          localStorage.setItem('token', data.token); // Store token in localStorage
-          setIsAuthenticated(true); // Set the authentication state to true
+          const expiryTime = new Date().getTime() + 3600000; // Set token expiry time for 1 hour
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('expiryTime', new Date(expiryTime).toISOString());
+          setIsAuthenticated(true);
           resetForm();
           navigate('/dashboard');
         } else {

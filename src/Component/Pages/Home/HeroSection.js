@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; // Import the Link component
-import fitnessQuestImage from '../../img/FitnessQuestRPG.png';
+import fitnessQuestImage from '../../../img/FitnessQuestRPG.png';
 
 const HeroSection = () => {
   return (

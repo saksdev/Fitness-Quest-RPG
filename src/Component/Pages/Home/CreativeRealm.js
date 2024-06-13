@@ -1,5 +1,5 @@
 import React from 'react';
-import creativity from '../../img/Creativity.png';
+import creativity from '../../../img/Creativity.png';
 
 const CreativeRealm = () => {
   return (
