@@ -1,8 +1,8 @@
-// src/App.js
 import React, { useState, useEffect } from 'react';
-import './App.css';
-
 import { Routes, Route } from 'react-router-dom';
+import axios from 'axios';
+
+import './App.css';
 import HomePage from './Component/Pages/HomePage.js';
 import Signup from './Component/Signup.js';
 import Login from './Component/Login.js';
@@ -12,16 +12,32 @@ import Contact from './Component/Pages/Contact.js';
 import NotFound from './Component/Pages/NotFound.js';
 import Dashboard from './Component/UserDashboard.js';
 
-import ProtectedRoute from './Component/Tools/PrivateRoute.js';
-
+import ProtectedRoute from './Component/Tools/ProtectedRoute.js';
 
 function App() {
-
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    setIsAuthenticated(!!token);
+    const checkAuth = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/auth', { withCredentials: true });
+        if (response.status === 200) {
+          setIsAuthenticated(true);
+        }
+      } catch (error) {
+        setIsAuthenticated(false);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    checkAuth();
   }, []);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
@@ -33,13 +49,11 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<NotFound />} />
-
         <Route path="/dashboard" element={
-            <ProtectedRoute isAuthenticated={isAuthenticated}>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
+          <ProtectedRoute isAuthenticated={isAuthenticated}>
+            <Dashboard setIsAuthenticated={setIsAuthenticated} />
+          </ProtectedRoute>
+        } />
       </Routes>
     </>
   );

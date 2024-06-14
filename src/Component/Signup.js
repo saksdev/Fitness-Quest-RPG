@@ -4,8 +4,9 @@ import { useFormik } from 'formik';
 import * as Yup from "yup";
 import toast, { Toaster } from 'react-hot-toast';
 import { ClipLoader } from 'react-spinners';
-import './Css/auth.css';
+import { useNavigate } from 'react-router-dom';
 
+import './Css/auth.css';
 import Logo from '../img/nav-logo.svg';
 import SignupImg from "../img/Signup-img.jpg";
 
@@ -19,6 +20,7 @@ const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const navigate = useNavigate();
 
   const ShowPassword = () => {
     setShowPassword(!showPassword);
@@ -70,7 +72,7 @@ const Signup = () => {
             toast.success(data.message.message);
             action.resetForm();
             setTimeout(() => {
-              window.location.href = "/login";
+              navigate('/login');
             }, 3000);
           } else {
             toast.error(data.message.message);

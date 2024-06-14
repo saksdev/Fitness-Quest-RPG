@@ -1,10 +1,10 @@
-// Login.js
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import toast, { Toaster } from 'react-hot-toast';
 import { ClipLoader } from 'react-spinners';
+import axios from 'axios';
 
 import './Css/auth.css';
 import Logo from '../img/nav-logo.svg';
@@ -22,17 +22,6 @@ const Login = ({ setIsAuthenticated }) => {
     setShowPassword(!showPassword);
   };
 
-  const [isWideScreen, setIsWideScreen] = useState(window.innerWidth >= 769);
-  useEffect(() => {
-    const handleResize = () => {
-      setIsWideScreen(window.innerWidth >= 768);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
   const initialValues = {
     email: '',
     password: ''
@@ -49,23 +38,17 @@ const Login = ({ setIsAuthenticated }) => {
     onSubmit: async (values, { resetForm }) => {
       setIsSubmitting(true);
       try {
-        const Loginresponse = await fetch('http://localhost:3000/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(values)
+        const response = await axios.post('http://localhost:3000/login', values, {
+          withCredentials: true, // Allow sending cookies with cross-origin requests
         });
 
-        const data = await Loginresponse.json();
-        if (Loginresponse.ok) {
-          toast.success(data.message);
-          localStorage.setItem('token', data.token); // Store token in localStorage
+        if (response.status === 200) {
+          toast.success(response.data.message);
           setIsAuthenticated(true); // Set the authentication state to true
           resetForm();
           navigate('/dashboard');
         } else {
-          toast.error(data.message);
+          toast.error(response.data.message);
         }
       } catch (error) {
         toast.error('An error occurred. Please try again later.');
@@ -108,49 +91,49 @@ const Login = ({ setIsAuthenticated }) => {
                           value={values.email}
                           onChange={handleChange}
                           onBlur={handleBlur}
+                          className={errors.email && touched.email ? 'input-error' : ''}
                         />
                       </div>
+                      {errors.email && touched.email && <p className='error-text'>{errors.email}</p>}
                     </div>
-                    {errors.email && touched.email ? <p className='Form-error'>{errors.email}</p> : null}
                   </div>
                   <div>
                     <div className='form-input'>
                       <div className='form-icon'>
                         <RiLockPasswordFill className='form-icon-img' />
                         <input
-                          type={showPassword ? 'text' : 'password'}
+                          type={showPassword ? "text" : "password"}
                           placeholder="Password"
                           name='password'
                           value={values.password}
                           onChange={handleChange}
                           onBlur={handleBlur}
+                          className={errors.password && touched.password ? 'input-error' : ''}
                         />
-                        {showPassword ? (
-                          <FaEye className='Eyechange' onClick={ShowPassword} />
-                        ) : (
-                          <FaEyeSlash className='Eyechange' onClick={ShowPassword} />
-                        )}
+                        <div onClick={ShowPassword} className='show-password-icon'>
+                          {showPassword ? <FaEyeSlash /> : <FaEye />}
+                        </div>
                       </div>
+                      {errors.password && touched.password && <p className='error-text'>{errors.password}</p>}
                     </div>
-                    {errors.password && touched.password ? <p className='Form-error'>{errors.password}</p> : null}
+                  </div>
+                  <div className='form-submit'>
+                    <button type="submit" disabled={isSubmitting}>
+                      {isSubmitting ? <ClipLoader color={'#fff'} size={20} /> : 'Sign In'}
+                    </button>
+                    <p className='forgot-password'>
+                      <Link to='/forgot-password'>Forgot Password?</Link>
+                    </p>
                   </div>
                 </div>
-                <span className="forgot-password">
-                  <Link to="/forgot-password">Forgot Password?</Link>
-                </span>
-                <button className='btn btn-primary access-btn' type="submit" disabled={isSubmitting}>
-                  {isSubmitting ? <ClipLoader size={15} color={"#fff"} /> : 'Access My Account'}
-                </button>
               </div>
             </form>
           </div>
         </div>
-      </div>
-      {isWideScreen && (
-        <div className='auth-image'>
+        <div className='auth-img'>
           <img src={LoginImg} alt="Login" />
         </div>
-      )}
+      </div>
     </div>
   );
 };
