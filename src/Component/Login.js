@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import toast, { Toaster } from 'react-hot-toast';
-import { ClipLoader } from 'react-spinners';
+import { BeatLoader } from 'react-spinners';
 import axios from 'axios';
 
 import './Css/auth.css';
@@ -58,7 +58,9 @@ const Login = ({ setIsAuthenticated }) => {
           toast.success(response.data.message);
           setIsAuthenticated(true); // Set the authentication state to true
           resetForm();
-          navigate('/dashboard');
+          setTimeout(() => {
+            navigate('/dashboard');
+          }, 800); 
         } else {
           toast.error(response.data.message);
         }
@@ -134,7 +136,7 @@ const Login = ({ setIsAuthenticated }) => {
                   <Link to="/forgot-password">Forgot Password?</Link>
                 </span>
                 <button className='btn btn-primary access-btn' type="submit" disabled={isSubmitting}>
-                  {isSubmitting ? <ClipLoader size={15} color={"#fff"} /> : 'Access My Account'}
+                  {isSubmitting ? <BeatLoader size={7} color={"#fff"} /> : 'Access My Account'}
                 </button>
               </div>
             </form>

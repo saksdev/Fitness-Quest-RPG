@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from "yup";
 import toast, { Toaster } from 'react-hot-toast';
-import { ClipLoader } from 'react-spinners';
+import { BeatLoader } from 'react-spinners';
 import { useNavigate } from 'react-router-dom';
 
 import './Css/auth.css';
@@ -186,7 +186,7 @@ const Signup = () => {
                   </div>
                 </div>
                 <button className='btn btn-primary access-btn' type="submit" disabled={isSubmitting}>
-                  {isSubmitting ? <ClipLoader size={15} color={"#fff"} /> : 'Sign Up'}
+                  {isSubmitting ? <BeatLoader size={7} color={"#fff"} /> : 'Sign Up'}
                 </button>
               </div>
             </form>
