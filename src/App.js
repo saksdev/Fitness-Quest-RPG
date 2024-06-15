@@ -14,6 +14,8 @@ import Dashboard from './Component/UserDashboard.js';
 
 import ProtectedRoute from './Component/Tools/ProtectedRoute.js';
 
+import LoadingImg from './img/Loading.svg';
+
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -36,7 +38,12 @@ function App() {
   }, []);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className='loading'>
+        <img src={LoadingImg} alt='Loading...'></img>
+      </div>
+
+    );
   }
 
   return (

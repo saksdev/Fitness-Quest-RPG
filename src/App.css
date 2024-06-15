@@ -47,3 +47,14 @@ mark{
     padding: 0px 5px;
     border-radius: 10px;
 }
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.loading img{
+    width: 100px !important;
+}
