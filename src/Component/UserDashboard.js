@@ -2,6 +2,11 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+import './Css/Dashboard.css';
+
+import Navbar from './Dashboard/Navbar.js';
+import Sidebar from './Dashboard/Sidebar.js';
+
 const Dashboard = ({ setIsAuthenticated }) => {
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
@@ -23,19 +28,25 @@ const Dashboard = ({ setIsAuthenticated }) => {
         navigate('/login');
       }
     };
-
     fetchUserData();
   }, [navigate, setIsAuthenticated]);
 
   return (
-    <div>
-      <h1>Dashboard</h1>
+    <>
+            {/* <p>User ID: {userData.userId}</p> */}
       {userData ? (
-        <p>Welcome, User ID: {userData}!</p>
-      ) : (
+      <div className='dashboard'>
+        <div className='dashboard-container'>
+          <Sidebar />
+          <div>
+            <Navbar userName={userData.name}/>
+          </div>
+        </div>
+      </div>
+       ) : (
         <p>Loading...</p>
       )}
-    </div>
+    </>
   );
 };
 

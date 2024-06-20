@@ -11,6 +11,7 @@ import About from './Component/Pages/About.js';
 import Contact from './Component/Pages/Contact.js';
 import NotFound from './Component/Pages/NotFound.js';
 import Dashboard from './Component/UserDashboard.js';
+import Test from './Component/test.js';
 
 import ProtectedRoute from './Component/Tools/ProtectedRoute.js';
 
@@ -55,6 +56,7 @@ function App() {
         <Route path="/features" element={<Features />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/test" element={<Test />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/dashboard" element={
           <ProtectedRoute isAuthenticated={isAuthenticated}>

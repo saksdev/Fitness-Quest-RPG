@@ -1,5 +1,7 @@
 import React from 'react';
 import FitnessTracking from '../../../img/FitnessTracking.png'
+import ImmersiveQuests from '../../../img/ImmersiveQuests.png'
+import CustomizableAvatar from '../../../img/CustomizableAvatar.jpg'
 
 const FeaturesSection = () => {
   return (
@@ -8,7 +10,7 @@ const FeaturesSection = () => {
         <h1>Key Features</h1>
         <div className="feature-list">
           <div className="feature">
-            <img src="icon1.png" alt="Immersive Quests" />
+            <img src={ImmersiveQuests} alt="Immersive Quests" />
             <h3>Immersive Quests</h3>
             <p>
               Embark on epic adventures and engage in thrilling quests that
@@ -26,7 +28,7 @@ const FeaturesSection = () => {
             </p>
           </div>
           <div className="feature">
-            <img src="icon3.png" alt="Customizable Avatar" />
+            <img src={CustomizableAvatar} alt="Customizable Avatar" />
             <h3>Customizable Avatar</h3>
             <p>
               Express your unique style by creating your own personalized

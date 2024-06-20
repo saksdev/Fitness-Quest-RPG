@@ -1,0 +1,33 @@
+.dashboard {
+	display: grid;
+	grid-template-columns: auto;
+	min-height: 100vh;
+	overflow: hidden;
+	background-color: #f3f6fd;
+}
+
+.dashboard-container {
+	display: grid;
+	grid-template-columns: minmax(270px, 15%) 1fr;
+}
+
+
+/* Dark mode styles */
+.dark {
+	background-color: #333;
+	color: #fff;
+}
+
+.dark .app-header {
+	background-color: #444;
+	border-bottom-color: #555;
+}
+
+.dark .mode-switch {
+	color: #ffcc00;
+	/* Example color for dark mode switch */
+}
+
+.dark .profile-btn span {
+	color: #fff;
+}
