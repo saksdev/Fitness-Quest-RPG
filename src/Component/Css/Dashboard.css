@@ -11,6 +11,17 @@
 	grid-template-columns: minmax(270px, 15%) 1fr;
 }
 
+.Loading{
+	display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.Loading img{
+	width: 60px !important;
+}
+
 
 /* Dark mode styles */
 .dark {

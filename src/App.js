@@ -11,7 +11,7 @@ import About from './Component/Pages/About.js';
 import Contact from './Component/Pages/Contact.js';
 import NotFound from './Component/Pages/NotFound.js';
 import Dashboard from './Component/UserDashboard.js';
-import Test from './Component/test.js';
+import Test from './Component/TempDashboard.js';
 
 import ProtectedRoute from './Component/Tools/ProtectedRoute.js';
 

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 import './Css/Dashboard.css';
+import Loading from '../img/Loading.svg';
 
 import Navbar from './Dashboard/Navbar.js';
 import Sidebar from './Dashboard/Sidebar.js';
@@ -33,18 +34,20 @@ const Dashboard = ({ setIsAuthenticated }) => {
 
   return (
     <>
-            {/* <p>User ID: {userData.userId}</p> */}
+      {/* <p>User ID: {userData.userId}</p> */}
       {userData ? (
-      <div className='dashboard'>
-        <div className='dashboard-container'>
-          <Sidebar />
-          <div>
-            <Navbar userName={userData.name}/>
+        <div className='dashboard'>
+          <div className='dashboard-container'>
+            <Sidebar />
+            <div>
+              <Navbar userName={userData.name} />
+            </div>
           </div>
         </div>
-      </div>
-       ) : (
-        <p>Loading...</p>
+      ) : (
+        <div className='Loading'>
+          <img src={Loading} alt='loading' />
+        </div>
       )}
     </>
   );
