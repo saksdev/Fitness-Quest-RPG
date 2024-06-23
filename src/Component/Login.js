@@ -14,9 +14,15 @@ import { MdMarkEmailUnread } from 'react-icons/md';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
-const Login = ({ setIsAuthenticated }) => {
+const Login = ({ setIsAuthenticated, isAuthenticated }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/dashboard');
+    }
+  }, [isAuthenticated, navigate]);
 
   const [showPassword, setShowPassword] = useState(false);
   const ShowPassword = () => {
@@ -43,7 +49,7 @@ const Login = ({ setIsAuthenticated }) => {
     email: Yup.string().email('Invalid email format').required('Email is required'),
     password: Yup.string().required('Password is required')
   });
-  
+
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
     initialValues,
     validationSchema: LoginSchema,
@@ -60,7 +66,7 @@ const Login = ({ setIsAuthenticated }) => {
           resetForm();
           setTimeout(() => {
             navigate('/dashboard');
-          }, 800); 
+          }, 500);
         } else {
           toast.error(response.data.message);
         }

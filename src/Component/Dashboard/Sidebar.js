@@ -1,72 +1,96 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import '../Css/Sidebar.css';
-
 import Logo from '../../img/nav-logo.svg';
 import { IoLogOutOutline } from "react-icons/io5";
 import { IoSettingsOutline } from "react-icons/io5";
 import { BiSolidDashboard } from "react-icons/bi";
 import { FaCartShopping } from "react-icons/fa6";
 import { FaGift } from "react-icons/fa";
-// import { IoMdArrowDropleft } from "react-icons/io";
 
+const Sidebar = ({ handleLogout }) => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 900);
+  const location = useLocation();
 
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 900);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
-const Sidebar = () => {
-  const [activeMenu, setActiveMenu] = useState(null);
-
-
-  const handleMenuToggle = (index) => {
-    if (activeMenu === index) {
-      setActiveMenu(null);
-    } else {
-      setActiveMenu(index);
-    }
-  };
+  const menuItems = [
+    { icon: <BiSolidDashboard />, text: "Dashboard", link: "/dashboard" },
+    { icon: <FaGift />, text: "Reward", link: "/dashboard/reward" },
+    { icon: <FaCartShopping />, text: "Shop", link: "/dashboard/shop" },
+  ];
 
   return (
-    <div className='sidebar active'>
-      <div className="head">
-        <div className="user-img">
-          <img src={Logo} alt="Logo" />
+    <div className={`sidebar ${isMobile ? 'mobile' : ''}`}>
+      {!isMobile && (
+        <div className="head">
+          <div className="user-img">
+            <img src={Logo} alt="Logo" />
+          </div>
         </div>
-      </div>
-      <div className="nav">
-        <div className="menu">
-          <ul>
-            <li className="active">
-              <a href="/">
-                <BiSolidDashboard />
-                <span className="text">Dashboard</span>
-              </a>
-            </li>
-            <li className={activeMenu === 2 ? 'active' : ''} onClick={() => handleMenuToggle(2)}>
-              <a href="/">
-                <FaGift />
-                <span className="text">Reward</span>
-                <i className="arrow ph-bold ph-caret-down"></i>
-              </a>
-            </li>
-            <li className={activeMenu === 3 ? 'active' : ''} onClick={() => handleMenuToggle(3)}>
-              <a href="/">
-                <FaCartShopping />
-                <span className="text">Shop</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div className="menu">
-          <ul>
-            <li><a href="/"><IoSettingsOutline /><span className="text">Settings</span></a></li>
-          </ul>
-        </div>
-      </div>
-      <div className="menu">
+      )}
+      <nav className="menu">
         <ul>
-          <li><a href="/"><IoLogOutOutline /><span className="text">Logout</span></a></li>
+          {menuItems.map((item, index) => (
+            <li key={index} className={location.pathname === item.link ? 'active' : ''}>
+              <Link to={item.link}>
+                {item.icon}
+                <span className="text">{item.text}</span>
+              </Link>
+            </li>
+          ))}
+          {isMobile && (
+            <>
+              <li className={location.pathname === '/dashboard/setting' ? 'active' : ''}>
+                <Link to="/dashboard/setting">
+                  <IoSettingsOutline />
+                  <span className="text">Settings</span>
+                </Link>
+              </li>
+
+              <li onClick={handleLogout}>
+                <div className='logout'>
+                  <IoLogOutOutline />
+                  <span className="text">Logout</span>
+                </div>
+              </li>
+            </>
+          )}
         </ul>
-      </div>
+      </nav>
+
+      {!isMobile && (
+        <>
+        <div className="menu">
+            <ul>
+              <li className={location.pathname === '/dashboard/setting' ? 'active' : ''}>
+                <Link to="/dashboard/setting">
+                  <IoSettingsOutline />
+                  <span className="text">Settings</span>
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div className="logout-menu menu">
+            <ul>
+              <li onClick={handleLogout}>
+                <div className='logout'>
+                  <IoLogOutOutline />
+                  <span className="text">Logout</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          </>
+      )}
     </div>
   );
 };
 
 export default Sidebar;
+

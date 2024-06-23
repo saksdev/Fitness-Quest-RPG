@@ -12,12 +12,13 @@ import Contact from './Component/Pages/Contact.js';
 import NotFound from './Component/Pages/NotFound.js';
 import Dashboard from './Component/UserDashboard.js';
 import Test from './Component/TempDashboard.js';
-
 import ProtectedRoute from './Component/Tools/ProtectedRoute.js';
 
 import LoadingImg from './img/Loading.svg';
 
 function App() {
+  axios.defaults.withCredentials = true;
+
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -29,7 +30,9 @@ function App() {
           setIsAuthenticated(true);
         }
       } catch (error) {
-        setIsAuthenticated(false);
+        if (error.response && error.response.status === 401) {
+          setIsAuthenticated(false);
+        }
       } finally {
         setIsLoading(false);
       }
@@ -41,9 +44,8 @@ function App() {
   if (isLoading) {
     return (
       <div className='loading'>
-        <img src={LoadingImg} alt='Loading...'></img>
+        <img src={LoadingImg} alt='Loading...' />
       </div>
-
     );
   }
 
@@ -52,13 +54,17 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+        <Route path="/login" element={
+          <Login
+            setIsAuthenticated={setIsAuthenticated}
+            isAuthenticated={isAuthenticated} />}
+        />
         <Route path="/features" element={<Features />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/test" element={<Test />} />
         <Route path="*" element={<NotFound />} />
-        <Route path="/dashboard" element={
+        <Route path="/dashboard/*" element={
           <ProtectedRoute isAuthenticated={isAuthenticated}>
             <Dashboard setIsAuthenticated={setIsAuthenticated} />
           </ProtectedRoute>

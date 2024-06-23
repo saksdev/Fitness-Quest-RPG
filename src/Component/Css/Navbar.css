@@ -30,12 +30,13 @@
 }
 
 .profile-username{
+	color: #5a4b4b;
 	font-weight: 600;
 	text-transform: capitalize;
 }
 
 .profile-username-text{
-	color: #545454;
+	color: #878787;
 }
 
 .header__avatar {

@@ -4,6 +4,7 @@
 	min-height: 100vh;
 	overflow: hidden;
 	background-color: #f3f6fd;
+	font-family: var(--head-font);
 }
 
 .dashboard-container {
@@ -22,23 +23,7 @@
 	width: 60px !important;
 }
 
-
-/* Dark mode styles */
-.dark {
-	background-color: #333;
-	color: #fff;
+@media (max-width: 900px) {.dashboard-container {
+	display: block;
 }
-
-.dark .app-header {
-	background-color: #444;
-	border-bottom-color: #555;
-}
-
-.dark .mode-switch {
-	color: #ffcc00;
-	/* Example color for dark mode switch */
-}
-
-.dark .profile-btn span {
-	color: #fff;
 }

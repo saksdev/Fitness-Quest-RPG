@@ -67,9 +67,10 @@
     margin-bottom: 20px;
 }
 
-.login-input-items svg{
+.login-input-items svg {
     width: 20px;
     height: 20px;
+    -webkit-user-select: none;
     user-select: none;
 }
 
