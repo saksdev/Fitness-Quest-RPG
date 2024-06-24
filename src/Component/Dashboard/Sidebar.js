@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import '../Css/Sidebar.css';
+import '../Css/Dashboard/Sidebar.css';
 import Logo from '../../img/nav-logo.svg';
 import { IoLogOutOutline } from "react-icons/io5";
 import { IoSettingsOutline } from "react-icons/io5";

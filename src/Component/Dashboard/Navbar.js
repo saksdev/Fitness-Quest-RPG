@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import '../Css/Navbar.css';
+import '../Css/Dashboard/Navbar.css';
+
+import { Link } from 'react-router-dom';
 import { HiOutlineLogout } from "react-icons/hi";
 import { MdAccountCircle } from "react-icons/md";
 import { FaClipboardList } from "react-icons/fa";
@@ -39,11 +41,11 @@ const Navbar = ({ userName, handleLogout }) => {
                 <ul className="dropdown__list">
                   <li className="dropdown__list-item">
                     <span className="dropdown__icon"><MdAccountCircle /></span>
-                    <span className="dropdown__title">My Profile</span>
+                    <Link to='/dashboard/profile' className="dropdown__title">My Profile</Link>
                   </li>
                   <li className="dropdown__list-item">
                     <span className="dropdown__icon"><FaClipboardList /></span>
-                    <span className="dropdown__title">My Account</span>
+                    <Link to='/dashboard/account' className="dropdown__title">My Account</Link>
                   </li>
                   <li className="dropdown__list-item" onClick={handleLogout}>
                     <span className="dropdown__icon"><HiOutlineLogout /></span>

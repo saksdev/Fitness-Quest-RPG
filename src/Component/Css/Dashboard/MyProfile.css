@@ -1,0 +1,110 @@
+/* Profile.css */
+.profile-container {
+	max-width: 600px;
+	margin: 0 auto;
+	padding: 20px;
+	background-color: #f9f9f9;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-header {
+	text-align: center;
+	margin-bottom: 20px;
+  }
+  
+  .profile-header h1 {
+	color: #333;
+	font-size: 28px;
+  }
+  
+  .profile-content {
+	background-color: #ffffff;
+	padding: 20px;
+	border-radius: 8px;
+  }
+  
+  .profile-info p {
+	margin: 10px 0;
+	font-size: 16px;
+  }
+  
+  .profile-info strong {
+	color: #555;
+	width: 100px;
+	display: inline-block;
+  }
+  
+  .profile-picture {
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	object-fit: cover;
+	margin: 20px auto;
+	display: block;
+	border: 3px solid #3498db;
+  }
+  
+  .edit-button, .submit-button, .cancel-button {
+	background-color: #3498db;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	margin: 10px 5px;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+  }
+  
+  .edit-button:hover, .submit-button:hover {
+	background-color: #2980b9;
+  }
+  
+  .cancel-button {
+	background-color: #e74c3c;
+  }
+  
+  .cancel-button:hover {
+	background-color: #c0392b;
+  }
+  
+  .edit-form div {
+	margin-bottom: 15px;
+  }
+  
+  .edit-form label {
+	display: block;
+	margin-bottom: 5px;
+	color: #555;
+  }
+  
+  .edit-form input[type="text"],
+  .edit-form input[type="email"] {
+	width: 100%;
+	padding: 8px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+  }
+  
+  .edit-form input[type="file"] {
+	margin-top: 5px;
+  }
+  
+  .loading {
+	text-align: center;
+	padding: 20px;
+  }
+  
+  .loading img {
+	width: 50px;
+	height: 50px;
+  }
+  
+  .error {
+	color: #e74c3c;
+	text-align: center;
+	padding: 10px;
+	background-color: #fadbd8;
+	border-radius: 4px;
+	margin-bottom: 15px;
+  }

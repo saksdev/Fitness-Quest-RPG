@@ -1,8 +1,8 @@
 .dashboard {
 	display: grid;
 	grid-template-columns: auto;
-	min-height: 100vh;
 	overflow: hidden;
+	min-height: 100vh;
 	background-color: #f3f6fd;
 	font-family: var(--head-font);
 }
@@ -10,6 +10,12 @@
 .dashboard-container {
 	display: grid;
 	grid-template-columns: minmax(270px, 15%) 1fr;
+	max-height: 100vh;
+}
+
+.main-content{
+	height: 100%;
+	min-height: 100vh;
 }
 
 .Loading{

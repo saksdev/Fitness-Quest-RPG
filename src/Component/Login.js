@@ -18,11 +18,13 @@ const Login = ({ setIsAuthenticated, isAuthenticated }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate('/dashboard');
-    }
-  }, [isAuthenticated, navigate]);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     if (isAuthenticated) {
+  //       navigate('/dashboard');
+  //     }
+  //   }, 500);
+  // }, [isAuthenticated, navigate]);
 
   const [showPassword, setShowPassword] = useState(false);
   const ShowPassword = () => {
@@ -57,12 +59,12 @@ const Login = ({ setIsAuthenticated, isAuthenticated }) => {
       setIsSubmitting(true);
       try {
         const response = await axios.post('http://localhost:3000/login', values, {
-          withCredentials: true, // Allow sending cookies with cross-origin requests
+          withCredentials: true,
         });
 
         if (response.status === 200) {
-          toast.success(response.data.message);
-          setIsAuthenticated(true); // Set the authentication state to true
+          toast.success(response.data.message, { duration: 1000 });
+          setIsAuthenticated(true);
           resetForm();
           setTimeout(() => {
             navigate('/dashboard');
@@ -71,7 +73,11 @@ const Login = ({ setIsAuthenticated, isAuthenticated }) => {
           toast.error(response.data.message);
         }
       } catch (error) {
-        toast.error('An error occurred. Please try again later.');
+        if (error.response && error.response.data && error.response.data.message) {
+          toast.error(error.response.data.message);
+        } else {
+          toast.error('An error occurred. Please try again later.');
+        }
       } finally {
         setIsSubmitting(false);
       }
@@ -89,7 +95,7 @@ const Login = ({ setIsAuthenticated, isAuthenticated }) => {
             </Link>
             <div className='nav-links'>
               <Link to='/'>Home</Link>
-              <Link to='/'>FAQ</Link>
+              {/* <Link to='/'>FAQ</Link> */}
             </div>
           </div>
           <div className='auth'>

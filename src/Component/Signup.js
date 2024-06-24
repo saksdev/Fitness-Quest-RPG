@@ -99,7 +99,7 @@ const Signup = () => {
             </Link>
             <div className="nav-links">
               <Link to="/">Home</Link>
-              <Link to="/">FAQ</Link>
+              {/* <Link to="/">FAQ</Link> */}
             </div>
           </div>
           <div className="auth">

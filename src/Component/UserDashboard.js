@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Routes, Route } from 'react-router-dom';
 
-import './Css/Dashboard.css';
+import './Css/Dashboard/Dashboard.css';
 import Loading from '../img/Loading.svg';
 
 
