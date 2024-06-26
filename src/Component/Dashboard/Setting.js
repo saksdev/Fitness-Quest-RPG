@@ -7,7 +7,7 @@ function Setting() {
   const [formData, setFormData] = useState({
     name: '',
     twitterUrl: '',
-    bio: '', // Changed 'Bio' to 'bio' for consistency
+    bio: '',
   });
   const [profilePicture, setProfilePicture] = useState(null);
   const [previewUrl, setPreviewUrl] = useState('');

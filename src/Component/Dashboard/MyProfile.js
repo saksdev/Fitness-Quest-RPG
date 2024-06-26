@@ -16,6 +16,9 @@ function Profile({ handleLogout }) {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [showShareOptions, setShowShareOptions] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
+  const [isUploading, setIsUploading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -96,6 +99,72 @@ function Profile({ handleLogout }) {
     }
   };
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setSelectedFile(file);
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewUrl(reader.result);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setPreviewUrl(null);
+    }
+  };
+
+  const handleUploadClick = async () => {
+    if (!selectedFile) return;
+
+    setIsUploading(true);
+    const formData = new FormData();
+    formData.append('profilePicture', selectedFile);
+
+    try {
+      const response = await axios.post('http://localhost:3000/api/profile/upload-picture', formData, { withCredentials: true });
+      setProfile((prevProfile) => ({
+        ...prevProfile,
+        profilePicture: response.data.profilePicture,
+      }));
+      setSelectedFile(null);
+      setPreviewUrl(null);
+      toast.success('Profile picture uploaded successfully!');
+    } catch (error) {
+      console.error('Failed to upload profile picture:', error);
+      toast.error('Failed to upload profile picture. Please try again.');
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    e.target.classList.add('drop-zone--over');
+  };
+
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    e.target.classList.remove('drop-zone--over');
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    e.target.classList.remove('drop-zone--over');
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+      const file = files[0];
+      setSelectedFile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewUrl(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   if (isLoading) {
     return (
       <div className='loading'>
@@ -166,8 +235,32 @@ function Profile({ handleLogout }) {
           </div>
         </div>
         <div className='profile-picture'>
-          {profile.profilePicture && (
+          {profile.profilePicture ? (
             <img src={profile.profilePicture} alt="Profile" />
+          ) : (
+            <>
+              <div 
+                className="drop-zone" 
+                onDragOver={handleDragOver} 
+                onDragLeave={handleDragLeave} 
+                onDrop={handleDrop}
+                onClick={() => document.querySelector('.drop-zone__input').click()}
+              >
+                {previewUrl ? (
+                  <div className="drop-zone__thumb" style={{ backgroundImage: `url(${previewUrl})` }} />
+                ) : (
+                  <span className="drop-zone__prompt">Drop file here or click to upload</span>
+                )}
+                <input 
+                  className="drop-zone__input" 
+                  type="file" 
+                  onChange={handleFileChange}
+                />
+              </div>
+              <button className="dashboard-btn" onClick={handleUploadClick} disabled={!selectedFile || isUploading}>
+                {isUploading ? 'Updating...' : 'Upload'}
+              </button>
+            </>
           )}
         </div>
       </div>

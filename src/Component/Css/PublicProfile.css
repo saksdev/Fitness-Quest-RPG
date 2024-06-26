@@ -109,7 +109,10 @@
     }
 }
 
-
 .public-profile p{
 	margin: 0 !important;
+}
+
+.public-profile__btn button{
+    max-width: 70px;
 }

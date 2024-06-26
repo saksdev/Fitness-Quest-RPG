@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import '../Component/Css/PublicProfile.css';
 import LoadingImg from '../img/Loading.svg';
+import { BsTwitterX } from 'react-icons/bs';
 
 function PublicProfile() {
   console.log('PublicProfile component rendered');
@@ -47,6 +48,14 @@ function PublicProfile() {
     fetchPublicProfile();
   }, [fetchPublicProfile, username]);
 
+  const handleTwitterClick = () => {
+    if (profile && profile.twitter) {
+      window.open(profile.twitter, '_blank');
+    }
+  };
+
+  console.log(profile);
+
   if (isLoading) {
     return (
       <div className='loading'>
@@ -72,7 +81,6 @@ function PublicProfile() {
             <p>@{profile.username}</p>
           </div>
           <div className='public-profile__bio'>
-            {/* <p>Bio</p> */}
             <span>{profile.bio}</span>
           </div>
           <div className='public-profile__info'>
@@ -85,9 +93,17 @@ function PublicProfile() {
               <span>{profile.level}</span>
             </div>
           </div>
-          {/* <div className='public-profile__description'>
-            <span>{profile.description}</span>
-          </div> */}
+          {profile.twitter ? (
+            <div className='public-profile__btn'>
+              <button className="dashboard-btn" onClick={handleTwitterClick} aria-label="Visit Twitter profile">
+                <BsTwitterX />
+              </button>
+            </div>
+          ) : (
+            <div className='public-profile__description'>
+              <p>{profile.description}</p>
+            </div>
+          )}
         </div>
         <div className='public-profile__picture'>
           {profile.profilePicture && (
