@@ -41,6 +41,7 @@ const Signup = () => {
   }, []);
 
   const initialValues = {
+    username: "",
     name: "",
     email: "",
     password: "",
@@ -48,6 +49,7 @@ const Signup = () => {
   };
 
   const SignupSchema = Yup.object({
+    username: Yup.string().min(2).max(25).required("Username is required"),
     name: Yup.string().min(2).max(25).required("Name is required"),
     email: Yup.string().email().required("Email is required"),
     password: Yup.string().min(8).required("This is required"),
@@ -110,6 +112,22 @@ const Signup = () => {
                   <b>Already have an account?</b><Link to="/login">Login</Link>
                 </p>
                 <div className="login-input-items">
+                  <div>
+                    <div className="form-input">
+                      <div className="form-icon">
+                        <FaUserAlt className='form-icon-img' />
+                        <input
+                          type="text"
+                          placeholder="Username"
+                          name='username'
+                          value={values.username}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                        />
+                      </div>
+                    </div>
+                    {errors.username && touched.username ? <p className='Form-error'>{errors.username}</p> : null}
+                  </div>
                   <div>
                     <div className="form-input">
                       <div className="form-icon">

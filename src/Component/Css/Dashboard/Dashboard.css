@@ -1,35 +1,104 @@
 .dashboard {
-	display: grid;
-	grid-template-columns: auto;
 	overflow: hidden;
 	min-height: 100vh;
-	background-color: #f3f6fd;
 	font-family: var(--head-font);
-}
-
-.dashboard-container {
 	display: grid;
 	grid-template-columns: minmax(270px, 15%) 1fr;
-	max-height: 100vh;
 }
 
-.main-content{
+.main-content {
 	height: 100%;
 	min-height: 100vh;
 }
 
-.Loading{
+.Loading {
 	display: flex;
-    height: 100vh;
-    align-items: center;
-    justify-content: center;
+	height: 100vh;
+	align-items: center;
+	justify-content: center;
 }
 
-.Loading img{
+.Loading img {
 	width: 60px !important;
 }
 
-@media (max-width: 900px) {.dashboard-container {
-	display: block;
+.main-content.full-width {
+	padding-left: 0;
+	padding-top: 0;
+	height: 100%;
+	width: 100%;
+	min-height: 100vh;
+	min-width: 100vw;
+	background-color: rgb(227, 219, 215);
 }
+
+@media (max-width: 900px) {
+	.dashboard {
+		display: block;
+	}
+}
+
+
+.dashboard-btn {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	text-transform: uppercase;
+	background-color: transparent;
+	padding: 10px 20px;
+	border-radius: 8px;
+	border: 0;
+	cursor: pointer;
+	font-weight: 600;
+	font-size: 1rem;
+	font-family: system-ui;
+	border: 0.2px solid rgb(124 45 18);
+	transition: 100ms ease;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+.dashboard-btn-secondary {
+	--btn-color: #444;
+	--btn-bg: #fafafa;
+}
+
+.dashboard-btn svg {
+	width: 20px;
+	height: 20px;
+	flex-shrink: 0;
+}
+
+.dashboard-btn:hover {
+	box-shadow: 2px 2px 0 0 rgb(124 45 18);
+}
+
+.dashboard-btn:focus-visible {
+	outline: 0;
+	--btn-color: #002cc8;
+}
+
+.dashboard-btn:focus-visible::after {
+	position: absolute;
+	left: 50%;
+	top: calc(100% + 12px);
+	transform: translateX(-50%);
+	content: "\21E7";
+	animation: float .5s ease-in-out infinite;
+}
+
+@keyframes float {
+	0% {
+		transform: translateX(-50%) translatey(0px);
+	}
+
+	50% {
+		transform: translateX(-50%) translatey(-6px);
+	}
+
+	100% {
+		transform: translateX(-50%) translatey(0px);
+	}
 }

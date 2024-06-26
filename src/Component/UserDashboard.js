@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate, Routes, Route } from 'react-router-dom';
+import { useNavigate, Routes, Route, useLocation } from 'react-router-dom';
 
 import './Css/Dashboard/Dashboard.css';
 import Loading from '../img/Loading.svg';
-
 
 import DashboardHome from './Dashboard/DashboardHome.js';
 import Sidebar from './Dashboard/Sidebar.js';
@@ -17,6 +16,7 @@ import Shop from './Dashboard/Shop.js';
 const Dashboard = ({ setIsAuthenticated }) => {
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -70,22 +70,24 @@ const Dashboard = ({ setIsAuthenticated }) => {
     );
   }
 
+  const showSidebarAndNavbar = location.pathname !== '/dashboard/profile';
+
   return (
-    <div className='dashboard'>
-      <div className='dashboard-container'>
-        <Sidebar handleLogout={handleLogout} />
-        <div className='main-content'>
-          <Navbar userName={userData.name} handleLogout={handleLogout} />
-          <Routes>
-            <Route path='/' element={<DashboardHome /> }/>
-            <Route path="profile" element={<MyProfile />} />
-            <Route path="reward" element={<Reward />} />
-            <Route path="shop" element={<Shop />} />
-            <Route path="setting" element={<Setting />} />
-          </Routes>
+    <>
+        <div className='dashboard'>
+          {showSidebarAndNavbar && <Sidebar handleLogout={handleLogout} />}
+          <div className={`main-content ${!showSidebarAndNavbar ? 'full-width' : ''}`}>
+            {showSidebarAndNavbar && <Navbar userName={userData.name} handleLogout={handleLogout} />}
+            <Routes>
+              <Route path='/' element={<DashboardHome />} />
+              <Route path="profile" element={<MyProfile />} />
+              <Route path="reward" element={<Reward />} />
+              <Route path="shop" element={<Shop />} />
+              <Route path="setting" element={<Setting />} />
+            </Routes>
+          </div>
         </div>
-      </div>
-    </div>
+    </>
   );
 };
 

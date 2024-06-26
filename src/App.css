@@ -58,3 +58,9 @@ mark{
 .loading img{
     width: 100px !important;
 }
+
+
+::selection {
+    color: rgb(27, 21, 10);
+    background-color: rgb(226, 161, 39);
+}
