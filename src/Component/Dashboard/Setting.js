@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
+import Cropper from 'cropperjs';
+import 'cropperjs/dist/cropper.css';
+import '../Css/Dashboard/Setting.css';
 
 function Setting() {
   const [formData, setFormData] = useState({
@@ -12,7 +15,11 @@ function Setting() {
   const [profilePicture, setProfilePicture] = useState(null);
   const [previewUrl, setPreviewUrl] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [showCropModal, setShowCropModal] = useState(false);
   const navigate = useNavigate();
+  const fileInputRef = useRef(null);
+  const imageRef = useRef(null);
+  const cropperRef = useRef(null);
 
   useEffect(() => {
     fetchUserData();
@@ -41,24 +48,48 @@ function Setting() {
     }
   };
 
-  const handleFileChange = (e) => {
+  const handleProfilePictureChange = (e) => {
     const file = e.target.files[0];
-    setProfilePicture(file);
-    setPreviewUrl(URL.createObjectURL(file));
+    if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        toast.error('Image size should be less than 5MB');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setProfilePicture(e.target.result);
+        setShowCropModal(true);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleCropComplete = () => {
+    if (cropperRef.current) {
+      const croppedCanvas = cropperRef.current.getCroppedCanvas({
+        width: 418,
+        height: 418,
+        imageSmoothingEnabled: true,
+        imageSmoothingQuality: 'high',
+      });
+      croppedCanvas.toBlob((blob) => {
+        setPreviewUrl(URL.createObjectURL(blob));
+        setProfilePicture(blob);
+        setShowCropModal(false);
+      }, 'image/jpeg', 0.95);
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      // Update profile info
       await axios.put('http://localhost:3000/api/settings', formData, { withCredentials: true });
 
-      // Upload profile picture if a new one is selected
       if (profilePicture) {
-        const formData = new FormData();
-        formData.append('profilePicture', profilePicture);
-        await axios.post('http://localhost:3000/api/profile/upload-picture', formData, {
+        const imageFormData = new FormData();
+        imageFormData.append('profilePicture', profilePicture);
+        await axios.post('http://localhost:3000/api/profile/upload-picture', imageFormData, {
           withCredentials: true,
           headers: { 'Content-Type': 'multipart/form-data' },
         });
@@ -74,10 +105,101 @@ function Setting() {
     }
   };
 
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    e.target.classList.add('drop-zone--over');
+  };
+
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    e.target.classList.remove('drop-zone--over');
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    e.target.classList.remove('drop-zone--over');
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+      const file = files[0];
+      if (file.size > 5 * 1024 * 1024) {
+        toast.error('Image size should be less than 5MB');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfilePicture(reader.result);
+        setShowCropModal(true);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  useEffect(() => {
+    if (showCropModal && imageRef.current) {
+      cropperRef.current = new Cropper(imageRef.current, {
+        aspectRatio: 1,
+        viewMode: 1,
+        minCropBoxWidth: 200,
+        minCropBoxHeight: 200,
+        background: false,
+        responsive: true,
+        restore: false,
+      });
+    }
+    return () => {
+      if (cropperRef.current) {
+        cropperRef.current.destroy();
+      }
+    };
+  }, [showCropModal]);
+
   return (
     <div className="setting">
       <Toaster position="top-right" />
       <form onSubmit={handleSubmit}>
+        <div className="profile-picture-container">
+          <div className='profile-picture'>
+            {previewUrl ? (
+              <img 
+                src={previewUrl} 
+                alt="Profile Preview" 
+                onClick={() => fileInputRef.current.click()}
+                style={{ 
+                  cursor: 'pointer', 
+                  width: '100%', 
+                  height: '100%', 
+                  objectFit: 'cover',
+                  borderRadius: '50%'
+                }}
+              />
+            ) : (
+              <div 
+                className="drop-zone" 
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
+                onDrop={handleDrop}
+                onClick={() => fileInputRef.current.click()}
+                style={{ width: '100%', maxWidth: '418px', aspectRatio: '1 / 1' }}
+              >
+                <span className="drop-zone__prompt">Drop file here or click to upload</span>
+              </div>
+            )}
+            <input 
+              ref={fileInputRef}
+              type="file" 
+              onChange={handleProfilePictureChange}
+              accept="image/*"
+              hidden
+            />
+          </div>
+          <button type="submit" disabled={isLoading} className="dashboard-btn dashboard-btn-secondary">
+            {isLoading ? 'Updating...' : 'Update Profile'}
+          </button>
+        </div>
+
         <div>
           <label htmlFor="name">Name:</label>
           <input
@@ -112,23 +234,19 @@ function Setting() {
           />
           <small>{formData.bio.length}/100</small>
         </div>
-        <div>
-          <label htmlFor="profilePicture">Profile Picture:</label>
-          <input
-            type="file"
-            id="profilePicture"
-            name="profilePicture"
-            onChange={handleFileChange}
-            accept="image/*"
-          />
-          {previewUrl && (
-            <img src={previewUrl} alt="Profile Preview" style={{ width: '100px', height: '100px', objectFit: 'cover' }} />
-          )}
-        </div>
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? 'Updating...' : 'Update Profile'}
-        </button>
       </form>
+
+      {showCropModal && (
+        <div className="crop-modal">
+          <div className="crop-container">
+            <img ref={imageRef} src={profilePicture} alt="Upload" style={{ maxWidth: '100%' }} />
+            <div className="crop-buttons">
+              <button className='dashboard-btn dashboard-btn-secondary' onClick={handleCropComplete}>Crop and Set Image</button>
+              <button className='dashboard-btn dashboard-btn-secondary' onClick={() => setShowCropModal(false)}>Cancel</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

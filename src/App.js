@@ -11,11 +11,11 @@ import About from './Component/Pages/About.js';
 import Contact from './Component/Pages/Contact.js';
 import NotFound from './Component/Pages/NotFound.js';
 import Dashboard from './Component/UserDashboard.js';
+import ForgotPassword from './Component/ForgotPassword.js';
+import ResetPassword from './Component/ResetPassword.js';
 
 import PublicProfile from './Component/PublicProfile.js';
-
 import ProtectedRoute from './Component/Tools/ProtectedRoute.js';
-
 import LoadingImg from './img/Loading.svg';
 
 function App() {
@@ -62,6 +62,8 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/dashboard/*" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Dashboard setIsAuthenticated={setIsAuthenticated} /></ProtectedRoute>} />
         <Route path="/profile/:username" element={<PublicProfile />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

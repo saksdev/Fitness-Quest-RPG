@@ -75,7 +75,7 @@
     user-select: none;
 }
 
-input {
+.auth input {
     height: 42px;
     padding-left: 35px;
     padding-right: 35px;
@@ -288,4 +288,34 @@ mark a {
     .login-input p {
         font-size: 16px;
     }
+
+    .forgot-input{
+        flex-direction: column;
+    }
+}
+
+
+.forgotPassword form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+}
+
+.forgotPassword {
+    padding: 30px 20px;
+}
+
+.forgotPassword h2{
+    margin: 0;
+}
+
+.forgot-input{
+    gap: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.forgot-input input{
+    width: 300px;
 }
