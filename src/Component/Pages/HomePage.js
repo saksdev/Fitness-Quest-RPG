@@ -1,9 +1,6 @@
-// HomePage.js
 import React from 'react';
 import '../Css/HomePage.css'
-
 import Navigation from '../MainNavbar.js';
-
 import Section1 from './Home/HeroSection.js';
 import Section2 from './Home/FeaturesSection.js';
 import Section3 from './Home/CreativeRealm.js';

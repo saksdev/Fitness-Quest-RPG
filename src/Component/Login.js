@@ -18,14 +18,6 @@ const Login = ({ setIsAuthenticated, isAuthenticated }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     if (isAuthenticated) {
-  //       navigate('/dashboard');
-  //     }
-  //   }, 500);
-  // }, [isAuthenticated, navigate]);
-
   const [showPassword, setShowPassword] = useState(false);
   const ShowPassword = () => {
     setShowPassword(!showPassword);

@@ -9,7 +9,7 @@ import { CiShare1 } from "react-icons/ci";
 import { FiCopy } from "react-icons/fi";
 import toast, { Toaster } from 'react-hot-toast';
 
-const BASE_URL = process.env.REACT_APP_BASE_URL || 'https://yourwebsite.com';
+const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:3001/';
 
 function Profile({ handleLogout }) {
   const [profile, setProfile] = useState(null);
@@ -83,7 +83,6 @@ function Profile({ handleLogout }) {
           toast.error('Failed to copy link. Please try again.');
         });
     } else {
-      // Fallback for browsers that don't support clipboard API
       const textArea = document.createElement('textarea');
       textArea.value = profileUrl;
       document.body.appendChild(textArea);
@@ -239,10 +238,10 @@ function Profile({ handleLogout }) {
             <img src={profile.profilePicture} alt="Profile" />
           ) : (
             <>
-              <div 
-                className="drop-zone" 
-                onDragOver={handleDragOver} 
-                onDragLeave={handleDragLeave} 
+              <div
+                className="drop-zone"
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
                 onDrop={handleDrop}
                 onClick={() => document.querySelector('.drop-zone__input').click()}
               >
@@ -251,9 +250,9 @@ function Profile({ handleLogout }) {
                 ) : (
                   <span className="drop-zone__prompt">Drop file here or click to upload</span>
                 )}
-                <input 
-                  className="drop-zone__input" 
-                  type="file" 
+                <input
+                  className="drop-zone__input"
+                  type="file"
                   onChange={handleFileChange}
                 />
               </div>
