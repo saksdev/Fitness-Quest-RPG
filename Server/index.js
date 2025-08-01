@@ -6,7 +6,6 @@ const { authenticateToken, getUserDashboardData } = require('./Route/UserDashboa
 const { isAuthenticated } = require('./middlewares/auth');
 const { handleError } = require('./utils/errorhandler');
 const corsMiddleware = require('./config/corsConfig');
-
 const signupController = require('./controller/SignupController');
 const loginController = require('./controller/LoginController');
 const contactController = require('./controller/contactController');
