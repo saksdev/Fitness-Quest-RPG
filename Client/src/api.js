@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Global config
 const api = axios.create({
-  baseURL: 'http://localhost:3000', // Change this to your production URL when deploying
+  baseURL: 'https://fitnessquest-backend-wvi0.onrender.com', // Change this to your production URL when deploying
   withCredentials: true,
 });
 
