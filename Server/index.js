@@ -53,7 +53,7 @@ app.use('/api/profile', isAuthenticated, (req, res, next) => {
 }, profileRoutes);
 
 // Settings routes - for updating profile information
-app.use('/api/settings', isAuthenticated, settingsRoutes);
+// app.use('/api/settings', isAuthenticated, settingsRoutes);
 
 // Upload routes
 app.use('/api/profile', isAuthenticated, uploadRoutes);
