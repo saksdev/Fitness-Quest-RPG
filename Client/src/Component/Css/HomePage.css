@@ -1,0 +1,240 @@
+/* Section1.js */
+
+.hero-section {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.hero-content-container {
+  flex: 1 1 50%;
+  margin: auto;
+}
+
+.hero-content {
+  max-width: 550px;
+  margin: auto;
+}
+
+.hero-content h1 {
+  margin: 0;
+}
+
+.hero-description {
+  line-height: 140%;
+}
+
+.hero-image {
+  display: flex;
+  justify-content: center;
+  flex: 1 1 50%;
+}
+
+.hero-image img {
+  mask-image: radial-gradient(circle, black 50%, transparent 100%);
+  border-radius: 30px;
+}
+
+.cta-buttons {
+  margin: 20px 0px;
+}
+
+.btn-primary {
+  background-color: #000000;
+  color: #fff;
+  transition: transform 0.5s ease-in-out;
+}
+
+.hero-section .btn-primary:hover {
+  transform: scale(1.1);
+}
+
+.btn-secondary {
+  background-color: #00000000;
+  color: #000000;
+}
+
+
+/* Section 2 */
+
+.features .features-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.features h1 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 3rem;
+}
+
+.feature-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.feature {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.feature:hover {
+  transform: translateY(-5px);
+}
+
+.feature img {
+  max-width: 140px;
+}
+
+.feature h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.feature p {
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Section 3 */
+
+.creative-realm {
+  padding: 4rem 0;
+  background-color: #f8f8f8;
+}
+
+.creative-realm .content {
+  flex: 1 1 50%;
+  max-width: 600px;
+  padding-right: 2rem;
+}
+
+.creative-realm h2 {
+  margin-bottom: 1rem;
+}
+
+.creative-realm .btn {
+  background-color: #202020;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.creative-realm .image {
+  flex: 1 1 50%;
+  max-width: 600px;
+}
+
+.creative-realm img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Section 4 */
+
+.fitness-quest {
+  padding: 4rem 0;
+  background-color: #f8f8f8;
+}
+
+.fitness-quest .content {
+  flex: 1 1 50%;
+  max-width: 600px;
+  padding-right: 2rem;
+}
+
+.fitness-quest .btn {
+  color: #fff;
+  background-color: #000000;
+  transition: transform 0.5s ease-in-out;
+}
+
+.fitness-quest .btn:hover {
+  transform: scale(1.1)
+}
+
+.fitness-quest .image {
+  flex: 1 1 50%;
+  max-width: 600px;
+}
+
+/* Footer.css */
+
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--footer-background-color);
+  color: var(--footer-color);
+  padding: 80px 50px 40px 50px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}
+
+.footer-links svg {
+  width: 24px;
+  height: 24px;
+  color: var(--footer-color);
+}
+
+.footer-links svg:hover {
+  color: rgb(235, 235, 237);
+}
+
+.footer-links hr {
+  height: 13px;
+  border: 1px solid rgb(62, 67, 76);
+  margin: 0px 16px;
+}
+
+.footer-bottom p {
+  margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+
+  .hero-content,
+  .hero-image {
+    flex: 1 1 100%;
+  }
+
+  .hero-title {
+    font-size: 1.875rem;
+  }
+
+  .creative-realm .container {
+    flex-direction: column;
+  }
+
+  .creative-realm .content {
+    padding-right: 0;
+    margin-bottom: 2rem;
+  }
+
+  .fitness-quest .container {
+    flex-direction: column-reverse;
+  }
+
+  .fitness-quest .content {
+    padding-right: 0;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+}

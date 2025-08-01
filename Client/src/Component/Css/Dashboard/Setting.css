@@ -1,0 +1,174 @@
+.setting {
+	margin: 0 auto;
+	padding: 20px;
+	border-radius: 8px;
+  }
+  
+  .setting form {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+  }
+  
+  .profile-picture-container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 20px;
+	margin-right: 50px;
+  }
+  
+  .setting .profile-picture {
+	width: 100%;
+	max-width: 300px;
+	position: relative;
+	overflow: hidden;
+	border-radius: 50%;
+  }
+  
+  .setting .profile-picture img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 50%;
+  }
+  
+  .update-btn {
+	align-self: flex-start;
+	margin-left: 20px;
+  }
+  
+  .setting label {
+	font-weight: bold;
+	margin-bottom: 5px;
+	display: block;
+  }
+  
+  .setting input[type="text"],
+  .setting input[type="url"],
+  .setting textarea {
+	max-width: 600px;
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 16px;
+  }
+  
+  .setting textarea {
+	resize: vertical;
+	min-height: 100px;
+  }
+  
+  .setting small {
+	color: #666;
+	font-size: 12px;
+	margin-top: 5px;
+	display: block;
+  }
+  
+  .setting .drop-zone {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 2px dashed #007bff;
+	border-radius: 50%;
+	cursor: pointer;
+	max-width: fit-content !important;
+  }
+  
+  .setting .drop-zone__prompt {
+	text-align: center;
+	color: #007bff;
+  }
+  
+  
+  .crop-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+	padding: 20px;
+  }
+  
+  .crop-container {
+	background-color: white;
+	padding: 20px;
+	border-radius: 8px;
+	width: 90%;
+	max-width: 600px;
+	height: auto;
+	max-height: 90vh;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .crop-container img {
+	max-width: 100%;
+	max-height: calc(80vh - 100px);
+	object-fit: contain;
+  }
+  
+  .crop-buttons {
+	margin-top: 20px;
+	display: flex;
+	justify-content: space-between;
+	padding: 0 10px;
+  }
+  
+  .crop-buttons button:last-child {
+	background-color: #6c757d;
+  }
+  
+  .crop-buttons button:last-child:hover {
+	background-color: #5a6268;
+  }
+  
+  .cropper-container {
+	width: auto !important;
+  }
+  
+  @media (max-width: 768px) {
+	.setting {
+	  padding: 15px;
+	  padding-bottom: 90px;
+	}
+  
+	.profile-picture-container {
+	  flex-direction: column;
+	  align-items: center;
+	  margin-right: 0;
+	}
+  
+	.setting .profile-picture {
+	  max-width: 300px;
+	}
+  
+	.update-btn {
+	  margin-top: 20px;
+	  margin-left: 0;
+	  width: 100%;
+	}
+  
+	.crop-container {
+	  width: 95%;
+	  padding: 15px;
+	}
+  
+	.crop-buttons {
+	  flex-direction: column;
+	  gap: 10px;
+	}
+  
+	.crop-buttons button {
+	  width: 100%;
+	}
+  }
