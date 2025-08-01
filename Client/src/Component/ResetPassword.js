@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
+
+import { resetPassword } from '../api.js'; // ✅ Import API
 
 function ResetPassword() {
   const [newPassword, setNewPassword] = useState('');
@@ -17,7 +18,7 @@ function ResetPassword() {
     }
     setIsLoading(true);
     try {
-      const response = await axios.post('http://localhost:3000/reset-password', { token, newPassword });
+      const response = await resetPassword(token, newPassword); // ✅ Use centralized API
       toast.success(response.data.message);
       navigate('/login');
     } catch (error) {

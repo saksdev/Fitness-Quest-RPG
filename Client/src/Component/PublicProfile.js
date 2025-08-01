@@ -1,25 +1,22 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import '../Component/Css/PublicProfile.css';
 import LoadingImg from '../img/Loading.svg';
 import { BsTwitterX } from 'react-icons/bs';
 
+import { getPublicProfile } from '../api.js';  // ✅ Import API
+import '../Component/Css/PublicProfile.css';
+
 function PublicProfile() {
-  console.log('PublicProfile component rendered');
   const { username } = useParams();
-  console.log('Username from params:', username);
 
   const [profile, setProfile] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchPublicProfile = useCallback(async () => {
-    console.log('Fetching profile for username:', username);
     try {
       setIsLoading(true);
-      const response = await axios.get(`http://localhost:3000/api/public-profile/${username}`);
-      console.log('API response:', response.data);
+      const response = await getPublicProfile(username);  // ✅ Use API function
       if (response.data.success) {
         setProfile(response.data.data);
         setError(null);
@@ -27,15 +24,11 @@ function PublicProfile() {
         throw new Error(response.data.message || 'Failed to fetch profile');
       }
     } catch (error) {
-      console.error('Error fetching profile:', error);
       if (error.response) {
-        console.error('Error response:', error.response.data);
         setError(error.response.data.message || 'Failed to load public profile');
       } else if (error.request) {
-        console.error('No response received:', error.request);
         setError('No response from server');
       } else {
-        console.error('Error details:', error.message);
         setError('Error setting up the request');
       }
     } finally {
@@ -44,17 +37,14 @@ function PublicProfile() {
   }, [username]);
 
   useEffect(() => {
-    console.log('useEffect triggered, username:', username);
     fetchPublicProfile();
-  }, [fetchPublicProfile, username]);
+  }, [fetchPublicProfile]);
 
   const handleTwitterClick = () => {
     if (profile && profile.twitter) {
       window.open(profile.twitter, '_blank');
     }
   };
-
-  console.log(profile);
 
   if (isLoading) {
     return (

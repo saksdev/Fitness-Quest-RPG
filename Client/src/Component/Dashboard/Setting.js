@@ -1,10 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import Cropper from 'cropperjs';
 import 'cropperjs/dist/cropper.css';
 import '../Css/Dashboard/Setting.css';
+
+import {
+  getProfile,
+  updateSettings,
+  uploadProfilePicture,
+} from '../../api.js';  // Adjust path according to your folder structure
 
 function Setting() {
   const [formData, setFormData] = useState({
@@ -27,7 +32,7 @@ function Setting() {
 
   const fetchUserData = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/profile', { withCredentials: true });
+      const response = await getProfile();
       const { name, twitterUrl, bio, profilePicture } = response.data;
       setFormData({ name, twitterUrl, bio });
       setPreviewUrl(profilePicture);
@@ -39,12 +44,10 @@ function Setting() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === 'name' && value.length <= 30) {
-      setFormData({ ...formData, [name]: value });
-    } else if (name === 'bio' && value.length <= 100) {
-      setFormData({ ...formData, [name]: value });
+    if ((name === 'name' && value.length <= 30) || (name === 'bio' && value.length <= 100)) {
+      setFormData(prev => ({ ...prev, [name]: value }));
     } else if (name !== 'name' && name !== 'bio') {
-      setFormData({ ...formData, [name]: value });
+      setFormData(prev => ({ ...prev, [name]: value }));
     }
   };
 
@@ -84,15 +87,12 @@ function Setting() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      await axios.put('http://localhost:3000/api/settings', formData, { withCredentials: true });
+      await updateSettings(formData);
 
       if (profilePicture) {
         const imageFormData = new FormData();
         imageFormData.append('profilePicture', profilePicture);
-        await axios.post('http://localhost:3000/api/profile/upload-picture', imageFormData, {
-          withCredentials: true,
-          headers: { 'Content-Type': 'multipart/form-data' },
-        });
+        await uploadProfilePicture(imageFormData);
       }
 
       toast.success('Profile updated successfully');
@@ -163,21 +163,21 @@ function Setting() {
         <div className="profile-picture-container">
           <div className='profile-picture'>
             {previewUrl ? (
-              <img 
-                src={previewUrl} 
-                alt="Profile Preview" 
+              <img
+                src={previewUrl}
+                alt="Profile Preview"
                 onClick={() => fileInputRef.current.click()}
-                style={{ 
-                  cursor: 'pointer', 
-                  width: '100%', 
-                  height: '100%', 
+                style={{
+                  cursor: 'pointer',
+                  width: '100%',
+                  height: '100%',
                   objectFit: 'cover',
                   borderRadius: '50%'
                 }}
               />
             ) : (
-              <div 
-                className="drop-zone" 
+              <div
+                className="drop-zone"
                 onDragOver={handleDragOver}
                 onDragLeave={handleDragLeave}
                 onDrop={handleDrop}
@@ -187,9 +187,9 @@ function Setting() {
                 <span className="drop-zone__prompt">Drop file here or click to upload</span>
               </div>
             )}
-            <input 
+            <input
               ref={fileInputRef}
-              type="file" 
+              type="file"
               onChange={handleProfilePictureChange}
               accept="image/*"
               hidden

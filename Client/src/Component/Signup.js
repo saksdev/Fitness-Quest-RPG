@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from "yup";
 import toast, { Toaster } from 'react-hot-toast';
 import { BeatLoader } from 'react-spinners';
-import { useNavigate } from 'react-router-dom';
 
 import './Css/auth.css';
 import Logo from '../img/nav-logo.svg';
@@ -13,8 +12,9 @@ import SignupImg from "../img/Signup-img.jpg";
 import { FaUserAlt } from "react-icons/fa";
 import { MdMarkEmailUnread } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { FaEye } from "react-icons/fa";
-import { FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
+import { signupUser } from '../api.js'; // ✅ Import signup API
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -22,22 +22,14 @@ const Signup = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
-  const ShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-  const ShowConfirmPassword = () => {
-    setShowConfirmPassword(!showConfirmPassword);
-  };
+  const ShowPassword = () => setShowPassword(!showPassword);
+  const ShowConfirmPassword = () => setShowConfirmPassword(!showConfirmPassword);
 
   const [isWideScreen, setIsWideScreen] = useState(window.innerWidth >= 769);
   useEffect(() => {
-    const handleResize = () => {
-      setIsWideScreen(window.innerWidth >= 768);
-    };
+    const handleResize = () => setIsWideScreen(window.innerWidth >= 768);
     window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const initialValues = {
@@ -57,36 +49,24 @@ const Signup = () => {
   });
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
-    initialValues: initialValues,
+    initialValues,
     validationSchema: SignupSchema,
-    onSubmit: (values, action) => {
+    onSubmit: async (values, action) => {
       setIsSubmitting(true);
-      fetch('http://localhost:3000/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(values),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.message.status === 201) {
-            toast.success(data.message.message);
-            action.resetForm();
-            setTimeout(() => {
-              navigate('/login');
-            }, 3000);
-          } else {
-            toast.error(data.message.message);
-          }
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-          toast.error('An error occurred. Please try again later.');
-        })
-        .finally(() => {
-          setIsSubmitting(false);
-        });
+      try {
+        const response = await signupUser(values);  // ✅ Use centralized API
+        if (response.status === 201) {
+          toast.success(response.data.message);
+          action.resetForm();
+          setTimeout(() => navigate('/login'), 3000);
+        } else {
+          toast.error(response.data.message);
+        }
+      } catch (error) {
+        toast.error(error.response?.data?.message || 'An error occurred. Please try again later.');
+      } finally {
+        setIsSubmitting(false);
+      }
     },
   });
 
@@ -101,7 +81,6 @@ const Signup = () => {
             </Link>
             <div className="nav-links">
               <Link to="/">Home</Link>
-              {/* <Link to="/">FAQ</Link> */}
             </div>
           </div>
           <div className="auth">
@@ -126,7 +105,7 @@ const Signup = () => {
                         />
                       </div>
                     </div>
-                    {errors.username && touched.username ? <p className='Form-error'>{errors.username}</p> : null}
+                    {errors.username && touched.username && <p className='Form-error'>{errors.username}</p>}
                   </div>
                   <div>
                     <div className="form-input">
@@ -142,7 +121,7 @@ const Signup = () => {
                         />
                       </div>
                     </div>
-                    {errors.name && touched.name ? <p className='Form-error'>{errors.name}</p> : null}
+                    {errors.name && touched.name && <p className='Form-error'>{errors.name}</p>}
                   </div>
                   <div>
                     <div className="form-input">
@@ -158,7 +137,7 @@ const Signup = () => {
                         />
                       </div>
                     </div>
-                    {errors.email && touched.email ? <p className='Form-error'>{errors.email}</p> : null}
+                    {errors.email && touched.email && <p className='Form-error'>{errors.email}</p>}
                   </div>
                   <div>
                     <div className="form-input">
@@ -179,7 +158,7 @@ const Signup = () => {
                         )}
                       </div>
                     </div>
-                    {errors.password && touched.password ? <p className='Form-error'>{errors.password}</p> : null}
+                    {errors.password && touched.password && <p className='Form-error'>{errors.password}</p>}
                   </div>
                   <div>
                     <div className="form-input">
@@ -200,7 +179,7 @@ const Signup = () => {
                         )}
                       </div>
                     </div>
-                    {errors.confirmPassword && touched.confirmPassword ? <p className='Form-error'>{errors.confirmPassword}</p> : null}
+                    {errors.confirmPassword && touched.confirmPassword && <p className='Form-error'>{errors.confirmPassword}</p>}
                   </div>
                 </div>
                 <button className='btn btn-primary access-btn' type="submit" disabled={isSubmitting}>

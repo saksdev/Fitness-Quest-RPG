@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useNavigate, Routes, Route, useLocation } from 'react-router-dom';
 
 import './Css/Dashboard/Dashboard.css';
@@ -13,6 +12,8 @@ import Reward from './Dashboard/Reward.js';
 import Setting from './Dashboard/Setting.js';
 import Shop from './Dashboard/Shop.js';
 
+import { fetchDashboardData, logoutUser } from '../api.js'; // ✅ Import APIs
+
 const Dashboard = ({ setIsAuthenticated }) => {
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/dashboard', { withCredentials: true });
+        const response = await fetchDashboardData();  // ✅ Use centralized API
         if (response.status === 200) {
           setUserData(response.data);
           setIsAuthenticated(true);
@@ -40,7 +41,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.post('http://localhost:3000/logout', {}, { withCredentials: true });
+      const response = await logoutUser();  // ✅ Use centralized API
       if (response.status === 200) {
         setIsAuthenticated(false);
         navigate('/login');
@@ -74,19 +75,19 @@ const Dashboard = ({ setIsAuthenticated }) => {
 
   return (
     <>
-        <div className='dashboard'>
-          {showSidebarAndNavbar && <Sidebar handleLogout={handleLogout} />}
-          <div className={`main-content ${!showSidebarAndNavbar ? 'full-width' : ''}`}>
-            {showSidebarAndNavbar && <Navbar userName={userData.name} handleLogout={handleLogout} />}
-            <Routes>
-              <Route path='/' element={<DashboardHome />} />
-              <Route path="profile" element={<MyProfile />} />
-              <Route path="reward" element={<Reward />} />
-              <Route path="shop" element={<Shop />} />
-              <Route path="setting" element={<Setting />} />
-            </Routes>
-          </div>
+      <div className='dashboard'>
+        {showSidebarAndNavbar && <Sidebar handleLogout={handleLogout} />}
+        <div className={`main-content ${!showSidebarAndNavbar ? 'full-width' : ''}`}>
+          {showSidebarAndNavbar && <Navbar userName={userData.name} handleLogout={handleLogout} />}
+          <Routes>
+            <Route path='/' element={<DashboardHome />} />
+            <Route path="profile" element={<MyProfile />} />
+            <Route path="reward" element={<Reward />} />
+            <Route path="shop" element={<Shop />} />
+            <Route path="setting" element={<Setting />} />
+          </Routes>
         </div>
+      </div>
     </>
   );
 };

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
 import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -12,6 +11,7 @@ import {
   Legend,
 } from 'chart.js';
 import LoadingImg from '../../img/Loading.svg';
+import { getFitbitStatus, getFitbitData } from '../../api.js'; // Updated path
 
 ChartJS.register(
   CategoryScale,
@@ -31,7 +31,7 @@ const DashboardHome = () => {
 
   const fetchFitbitData = useCallback(async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/dashboard/fitbit-data', { withCredentials: true });
+      const response = await getFitbitData();
       setFitbitData(response.data);
     } catch (err) {
       console.error('Error fetching Fitbit data:', err);
@@ -41,7 +41,7 @@ const DashboardHome = () => {
 
   const checkFitbitConnection = useCallback(async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/dashboard/fitbit-status', { withCredentials: true });
+      const response = await getFitbitStatus();
       setIsConnected(response.data.isConnected);
       if (response.data.isConnected) {
         await fetchFitbitData();
@@ -70,7 +70,7 @@ const DashboardHome = () => {
   }, [checkFitbitConnection]);
 
   const connectFitbit = () => {
-    window.location.href = 'http://localhost:3000/api/dashboard/connect-fitbit';
+    window.location.href = `${window.location.origin}/api/dashboard/connect-fitbit`;
   };
 
   const prepareChartData = () => {
@@ -119,7 +119,7 @@ const DashboardHome = () => {
   return (
     <div className="dashboard-home">
       {error && <p className="error">{error}</p>}
-      
+
       {!isConnected ? (
         <button onClick={connectFitbit}>Connect to Fitbit</button>
       ) : (

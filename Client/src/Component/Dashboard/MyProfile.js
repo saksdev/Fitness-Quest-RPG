@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar.js';
-import '../Css/Dashboard/MyProfile.css';
 import LoadingImg from '../../img/Loading.svg';
 import { BsTwitterX } from "react-icons/bs";
 import { CiShare1 } from "react-icons/ci";
 import { FiCopy } from "react-icons/fi";
 import toast, { Toaster } from 'react-hot-toast';
 
-const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:3001/';
+import { getProfile, uploadProfilePicture } from '../../api.js';  // ✅ centralized api
 
 function Profile({ handleLogout }) {
   const [profile, setProfile] = useState(null);
@@ -31,17 +29,14 @@ function Profile({ handleLogout }) {
         setShowShareOptions(false);
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [showShareOptions]);
 
   const fetchProfile = async () => {
     try {
       setIsLoading(true);
-      const response = await axios.get('http://localhost:3000/api/profile', { withCredentials: true });
+      const response = await getProfile();
       setProfile(response.data);
       setError(null);
     } catch (error) {
@@ -67,22 +62,20 @@ function Profile({ handleLogout }) {
   };
 
   const handleShareOnTwitter = () => {
-    const profileUrl = `${BASE_URL}/profile/${profile.username}`;
+    const profileUrl = `${window.location.origin}/profile/${profile.username}`;
     const tweetText = `Check out my profile on YourWebsite: ${profileUrl}`;
     const twitterShareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`;
     window.open(twitterShareUrl, '_blank');
   };
 
   const handleCopyLink = () => {
-    const profileUrl = `${BASE_URL}/profile/${profile.username}`;
+    const profileUrl = `${window.location.origin}/profile/${profile.username}`;
     if (navigator.clipboard) {
       navigator.clipboard.writeText(profileUrl)
         .then(() => toast.success('Profile link copied to clipboard!'))
-        .catch(err => {
-          console.error('Failed to copy: ', err);
-          toast.error('Failed to copy link. Please try again.');
-        });
+        .catch(() => toast.error('Failed to copy link. Please try again.'));
     } else {
+      // fallback for older browsers
       const textArea = document.createElement('textarea');
       textArea.value = profileUrl;
       document.body.appendChild(textArea);
@@ -90,8 +83,7 @@ function Profile({ handleLogout }) {
       try {
         document.execCommand('copy');
         toast.success('Profile link copied to clipboard!');
-      } catch (err) {
-        console.error('Fallback: Oops, unable to copy', err);
+      } catch {
         toast.error('Failed to copy link. Please try again.');
       }
       document.body.removeChild(textArea);
@@ -103,9 +95,7 @@ function Profile({ handleLogout }) {
     setSelectedFile(file);
     if (file) {
       const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreviewUrl(reader.result);
-      };
+      reader.onloadend = () => setPreviewUrl(reader.result);
       reader.readAsDataURL(file);
     } else {
       setPreviewUrl(null);
@@ -114,17 +104,12 @@ function Profile({ handleLogout }) {
 
   const handleUploadClick = async () => {
     if (!selectedFile) return;
-
     setIsUploading(true);
     const formData = new FormData();
     formData.append('profilePicture', selectedFile);
-
     try {
-      const response = await axios.post('http://localhost:3000/api/profile/upload-picture', formData, { withCredentials: true });
-      setProfile((prevProfile) => ({
-        ...prevProfile,
-        profilePicture: response.data.profilePicture,
-      }));
+      const response = await uploadProfilePicture(formData);
+      setProfile(prev => ({ ...prev, profilePicture: response.data.profilePicture }));
       setSelectedFile(null);
       setPreviewUrl(null);
       toast.success('Profile picture uploaded successfully!');
@@ -152,14 +137,11 @@ function Profile({ handleLogout }) {
     e.preventDefault();
     e.stopPropagation();
     e.target.classList.remove('drop-zone--over');
-    const files = e.dataTransfer.files;
-    if (files.length > 0) {
-      const file = files[0];
+    if (e.dataTransfer.files.length > 0) {
+      const file = e.dataTransfer.files[0];
       setSelectedFile(file);
       const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreviewUrl(reader.result);
-      };
+      reader.onloadend = () => setPreviewUrl(reader.result);
       reader.readAsDataURL(file);
     }
   };
