@@ -10,7 +10,7 @@ const signupController = require('./controller/SignupController');
 const loginController = require('./controller/LoginController');
 // const contactController = require('./controller/contactController');
 const profileRoutes = require('./Route/profileRoutes');
-const settingsRoutes = require('./Route/settingsRoutes.js');
+// const settingsRoutes = require('./Route/settingsRoutes.js');
 const uploadRoutes = require('./Route/uploadRoutes');
 const { logoutHandler } = require('./Route/Logout');
 const publicProfileRoutes = require('./Route/publicProfile');
@@ -53,7 +53,7 @@ app.use('/api/profile', isAuthenticated, (req, res, next) => {
 }, profileRoutes);
 
 // Settings routes - for updating profile information
-app.use('/api/settings', isAuthenticated, settingsRoutes);
+// app.use('/api/settings', isAuthenticated, settingsRoutes);
 
 // Upload routes
 app.use('/api/profile', isAuthenticated, uploadRoutes);
