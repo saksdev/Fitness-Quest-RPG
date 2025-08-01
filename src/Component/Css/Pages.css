@@ -75,10 +75,14 @@
 	border-radius: 4px;
 	resize: vertical;
   }
-
-
   
   .form-status {
 	margin-bottom: 10px;
 	font-weight: bold;
+  }
+
+  @media screen and (max-width: 390px) {
+	.features-container {
+		padding: 0;
+	  }
   }
