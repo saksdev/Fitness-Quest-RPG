@@ -8,14 +8,14 @@ const { handleError } = require('./utils/errorhandler');
 const corsMiddleware = require('./config/corsConfig');
 const signupController = require('./controller/SignupController');
 const loginController = require('./controller/LoginController');
-const contactController = require('./controller/contactController');
+// const contactController = require('./controller/contactController');
 const profileRoutes = require('./Route/profileRoutes');
 const settingsRoutes = require('./Route/settingsRoutes.js');
 const uploadRoutes = require('./Route/uploadRoutes');
 const { logoutHandler } = require('./Route/Logout');
 const publicProfileRoutes = require('./Route/publicProfile');
 const dashboardFitbit = require('./Route/dashboardfitbit.js');
-const forgotPasswordController = require('./controller/ForgotPasswordController');
+// const forgotPasswordController = require('./controller/ForgotPasswordController');
 
 const app = express();
 app.use(corsMiddleware);
