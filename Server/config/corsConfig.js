@@ -1,7 +1,7 @@
 const cors = require('cors');
 
 const corsOptions = {
-    origin: 'http://localhost:3001',
+    origin: 'https://fitnessquest-backend-wvi0.onrender.com',
     credentials: true,
 };
 
