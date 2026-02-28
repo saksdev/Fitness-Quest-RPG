@@ -34,8 +34,7 @@ app.post('/login', loginController.login);
 // Logout route
 app.post('/logout', isAuthenticated, logoutHandler);
 
-// Contact route
-// app.post('/api/contact', contactController.sendContactForm);
+// Contact route - Moved to third-party service (EmailJS)
 
 // Forgot Password routes
 // app.post('/forgot-password', forgotPasswordController.forgotPassword);
@@ -69,7 +68,7 @@ app.use((err, req, res, next) => {
     handleError(err, res);
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });

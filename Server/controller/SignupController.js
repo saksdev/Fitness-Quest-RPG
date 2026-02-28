@@ -5,13 +5,13 @@ const signup = async (req, res) => {
   const { username, name, email, password, confirmPassword } = req.body;
 
   if (password !== confirmPassword) {
-    return res.status(400).json({ message: { status: 400, message: "Passwords do not match" } });
+    return res.status(400).json({ message: "Passwords do not match" });
   }
 
   try {
     const existingUser = await User.findOne({ $or: [{ email }, { username }] });
     if (existingUser) {
-      return res.status(400).json({ message: { status: 400, message: "Email or username already exists" } });
+      return res.status(400).json({ message: "Email or username already exists" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -19,10 +19,10 @@ const signup = async (req, res) => {
 
     await newUser.save();
 
-    res.status(201).json({ message: { status: 201, message: "Account created successfully" } });
+    res.status(201).json({ message: "Account created successfully" });
   } catch (err) {
-    console.error('Error:', err);
-    res.status(500).json({ message: { status: 500, message: "An error occurred. Please try again later." } });
+    console.error('Signup Error:', err);
+    res.status(500).json({ message: "An error occurred. Please try again later." });
   }
 };
 

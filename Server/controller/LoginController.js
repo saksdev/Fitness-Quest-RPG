@@ -22,13 +22,13 @@ const login = async (req, res) => {
     res.cookie('token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
+      sameSite: 'lax',
       maxAge: 3600000, // 1 hour
     });
 
     return res.status(200).json({ message: "Login successful" });
   } catch (err) {
-    console.error('Error:', err);
+    console.error('Login Error:', err);
     return res.status(500).json({ message: "An error occurred. Please try again later." });
   }
 };
