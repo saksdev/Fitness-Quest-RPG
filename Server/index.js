@@ -68,12 +68,12 @@ app.use((err, req, res, next) => {
     handleError(err, res);
 });
 
-// Root route to show the server is up
-app.get('/', (req, res) => {
-    res.status(200).send('Fitness Quest API Server is running happily! 🚀');
-});
-
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
+});
+
+// Root route to show the server is up
+app.get('/', (req, res) => {
+    res.status(200).send('Fitness Quest API Server is running happily! 🚀');
 });
