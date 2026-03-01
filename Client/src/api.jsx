@@ -2,8 +2,7 @@ import axios from 'axios';
 
 // Global config
 const api = axios.create({
-  // baseURL: 'http://localhost:5000', // Disabled to use Vite proxy for better cookie handling
-  baseURL: '', // Using relative paths for Vite proxy
+  baseURL: import.meta.env.VITE_API_BASE_URL || '', // Use Vercel env var, otherwise relative path for Vite proxy
   withCredentials: true,
 });
 
