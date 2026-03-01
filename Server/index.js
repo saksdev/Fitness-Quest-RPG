@@ -73,6 +73,23 @@ app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
 
+// Health check route for Uptime Monitoring (Cron-job)
+app.get('/health', async (req, res) => {
+    try {
+        const mongoose = require('mongoose');
+        // A simple ping to the database to ensure it's still connected and awake
+        if (mongoose.connection.readyState === 1) {
+            await mongoose.connection.db.admin().ping();
+            res.status(200).json({ status: 'ok', database: 'connected' });
+        } else {
+            res.status(503).json({ status: 'error', database: 'disconnected' });
+        }
+    } catch (error) {
+        console.error('Health check database ping failed:', error);
+        res.status(500).json({ status: 'error', database: 'error' });
+    }
+});
+
 // Root route to show the server is up
 app.get('/', (req, res) => {
     res.status(200).send('Fitness Quest API Server is running happily! 🚀');
