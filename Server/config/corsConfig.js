@@ -1,7 +1,7 @@
 const cors = require('cors');
 
 const allowedOrigins = [
-    'http://localhost:5173',
+    process.env.FRONTEND_URL,
     process.env.CLIENT_URL, // Allow the deployed frontend URL (e.g., Vercel)
 ].filter(Boolean); // Remove undefined if CLIENT_URL is not set
 
