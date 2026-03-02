@@ -7,7 +7,7 @@ import { CiShare1 } from "react-icons/ci";
 import { FiCopy, FiUpload } from "react-icons/fi";
 import { FaTshirt, FaHardHat, FaRing, FaShieldAlt, FaFistRaised } from "react-icons/fa";
 import { GiLegArmor } from "react-icons/gi";
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import {
   Chart as ChartJS,
   RadialLinearScale,
@@ -151,7 +151,6 @@ function Profile({ handleLogout, setGlobalLoading }) {
 
   return (
     <div className="hero-sheet">
-      <Toaster position="bottom-center" />
       {/* Assuming Navbar is rendered by parent or we include it if needed. 
           The previous file included Navbar, so maintaining that. */}
       {/* <Navbar ... /> - UserDashboard usually renders Navbar, keeping it here if standalone */}

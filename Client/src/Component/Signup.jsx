@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from "yup";
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { BeatLoader } from 'react-spinners';
 
 import './Css/auth.css';
@@ -72,7 +72,6 @@ const Signup = () => {
 
   return (
     <div className="auth-container">
-      <Toaster position="top-right" reverseOrder={false} />
       <div className="auth-form-container">
         <div className="auth-form">
           <div className="auth-nav">

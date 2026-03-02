@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import Cropper from 'cropperjs';
 import 'cropperjs/dist/cropper.css';
 import '../Css/Dashboard/Setting.css';
@@ -157,8 +157,7 @@ function Setting() {
   }, [showCropModal]);
 
   return (
-    <div className="setting">
-      <Toaster position="top-right" />
+    <div className="settings-content">
       <form onSubmit={handleSubmit}>
         <div className="profile-picture-container">
           <div className='profile-picture'>

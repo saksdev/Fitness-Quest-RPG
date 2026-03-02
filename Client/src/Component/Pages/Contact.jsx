@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { ClipLoader } from 'react-spinners';
 import emailjs from '@emailjs/browser';
 
@@ -74,7 +74,6 @@ const ContactPage = () => {
     <>
       <Navigation />
       <div className="contact-page">
-        <Toaster position="top-right" reverseOrder={false} />
         <h1>Contact Us</h1>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
