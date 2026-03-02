@@ -73,6 +73,15 @@ app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
 
+
+// Root route to show the server is up
+app.get('/', (req, res) => {
+    res.status(200).send('Fitness Quest API Server is running happily! 🚀');
+});
+
+
+
+
 // Health check route for Uptime Monitoring (Cron-job)
 app.get('/health', async (req, res) => {
     try {
@@ -88,9 +97,4 @@ app.get('/health', async (req, res) => {
         console.error('Health check database ping failed:', error);
         res.status(500).json({ status: 'error', database: 'error' });
     }
-});
-
-// Root route to show the server is up
-app.get('/', (req, res) => {
-    res.status(200).send('Fitness Quest API Server is running happily! 🚀');
 });

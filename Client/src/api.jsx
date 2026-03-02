@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Global config
 const api = axios.create({
-  baseURL: import.meta.env.BACKEND_API_URL || '', // Use Vercel env var, otherwise relative path for Vite proxy
+  baseURL: import.meta.env.VITE_BACKEND_API_URL || '', // Use Vercel env var, otherwise relative path for Vite proxy
   withCredentials: true,
 });
 
