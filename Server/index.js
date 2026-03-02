@@ -84,6 +84,10 @@ app.listen(PORT, () => {
 });
 
 
+// Root route to show the server is up
+app.get('/', (req, res) => {
+    res.status(200).send('Fitness Quest API Server is running happily! 🚀');
+});
 
 
 // Health check route for Uptime Monitoring (Cron-job) Run Backend To stay Live In Render.com
