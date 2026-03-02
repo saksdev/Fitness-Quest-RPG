@@ -2,23 +2,10 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
-// Middleware to verify the JWT token
-const authenticateToken = (req, res, next) => {
-  const token = req.cookies.token;
+const { isAuthenticated } = require('../middlewares/auth');
 
-  if (!token) {
-    return res.status(401).json({ message: 'Access denied. No token provided.' });
-  }
-
-  try {
-    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decodedToken;
-    next();
-  } catch (err) {
-    console.error('Error verifying token:', err);
-    return res.status(403).json({ message: 'Invalid token.' });
-  }
-};
+// Renaming for backward compatibility if needed, but better to just use isAuthenticated
+const authenticateToken = isAuthenticated;
 
 // API endpoint to fetch user data
 const getUserDashboardData = async (req, res) => {

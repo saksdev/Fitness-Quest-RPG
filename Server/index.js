@@ -58,7 +58,7 @@ app.use('/api/profile', isAuthenticated, (req, res, next) => {
 app.use('/api/profile', isAuthenticated, uploadRoutes);
 
 // Protected dashboard route
-app.get('/dashboard', authenticateToken, getUserDashboardData);
+app.get('/dashboard', isAuthenticated, getUserDashboardData);
 
 // Use dashboard routes
 app.use('/api/dashboard', dashboardFitbit);

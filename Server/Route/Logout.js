@@ -1,5 +1,5 @@
 
-const isAuthenticated = require('../middlewares/auth');
+// Logout handler functionally used in index.js
 
 const logoutHandler = (req, res) => {
   try {
