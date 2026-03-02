@@ -1,0 +1,259 @@
+.app-header {
+	padding: 15px 30px;
+	background: linear-gradient(90deg, #151525, #1e1e35);
+	border-bottom: 2px solid rgba(255, 215, 0, 0.2);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	box-shadow: 0 5px 20px rgba(0, 0, 0, 0.8);
+	width: 100%;
+	height: 80px;
+	box-sizing: border-box;
+	position: sticky;
+	top: 0;
+	margin: 0;
+	z-index: 1100;
+	/* Higher than sidebar */
+}
+
+/* ... existing styles ... */
+
+.dropdown {
+	position: absolute;
+	top: 120%;
+	/* Push down slightly */
+	right: 0;
+	background-color: #1a1a2e;
+	/* Solid background to prevent see-through */
+	border: 2px solid var(--rpg-gold);
+	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
+	border-radius: 12px;
+	width: 220px;
+	overflow: hidden;
+	z-index: 1200;
+	animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+	from {
+		opacity: 0;
+		transform: translateY(-10px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.dropdown__list-item:hover {
+	color: var(--rpg-gold);
+	background-color: rgba(255, 215, 0, 0.2);
+}
+
+/* Right Side Container */
+.header__right {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	margin-left: auto;
+	/* Push to the right */
+}
+
+/* Gold Display Alignment */
+.nav-gold-display {
+	background: rgba(0, 0, 0, 0.6);
+	padding: 8px 16px;
+	border-radius: 20px;
+	border: 1px solid rgba(255, 215, 0, 0.3);
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-right: 0;
+	/* Removed explicit margin */
+	transition: 0.3s;
+	box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.nav-gold-display:hover {
+	border-color: var(--rpg-gold);
+	box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+}
+
+.nav-gold-coin {
+	width: 24px;
+	height: 24px;
+	background: radial-gradient(circle at 30% 30%, #ffd700, #b8860b);
+	border-radius: 50%;
+	border: 2px solid #daa520;
+	box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+	position: relative;
+	animation: spinCoin 4s infinite linear;
+}
+
+.nav-gold-coin::after {
+	content: '$';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 0.8rem;
+	font-weight: bold;
+	color: #5c4004;
+}
+
+.nav-gold-amount {
+	color: var(--rpg-gold);
+	font-weight: bold;
+	font-family: 'Cinzel', serif;
+	font-size: 1.1rem;
+	letter-spacing: 1px;
+}
+
+/* Profile Section */
+.header__profile {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+	position: relative;
+}
+
+.profile-username {
+	color: var(--rpg-gold);
+	font-weight: 700;
+	font-family: 'Cinzel', serif;
+	letter-spacing: 1px;
+	text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+	text-align: right;
+}
+
+.profile-username-text {
+	color: #aaa;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 400;
+	display: block;
+	font-size: 0.75rem;
+}
+
+.header__avatar {
+	width: 45px;
+	height: 45px;
+	border: none;
+	background: transparent;
+	cursor: pointer;
+	position: relative;
+}
+
+.avatar-gold-frame {
+	width: 100%;
+	height: 100%;
+	border: 2px solid var(--rpg-gold);
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(0, 0, 0, 0.5);
+	box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+	transition: 0.3s;
+}
+
+.header__avatar:hover .avatar-gold-frame {
+	transform: scale(1.1);
+	box-shadow: 0 0 20px var(--rpg-gold);
+	background: rgba(255, 215, 0, 0.1);
+}
+
+.dropdown {
+	position: absolute;
+	top: 120%;
+	/* Push down slightly */
+	right: 0;
+	background-color: #1a1a2e;
+	/* Solid background to prevent see-through */
+	border: 2px solid var(--rpg-gold);
+	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
+	border-radius: 12px;
+	width: 220px;
+	overflow: hidden;
+	z-index: 1200;
+	animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+	from {
+		opacity: 0;
+		transform: translateY(-10px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.dropdown__list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.dropdown__list-item {
+	padding: 12px 20px;
+	color: #ccc;
+	transition: 0.3s;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.dropdown__list-item:hover {
+	color: var(--rpg-gold);
+	background-color: rgba(255, 215, 0, 0.15);
+}
+
+.dropdown__link {
+	color: inherit;
+	text-decoration: none;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	width: 100%;
+}
+
+.dropdown__title {
+	font-size: 0.9rem;
+	font-weight: 600;
+}
+
+@media (max-width: 900px) {
+	.app-header {
+		padding: 10px 15px;
+		width: 100%;
+		/* Changed from 100vw to 100% to respect scrollbar */
+		max-width: 100%;
+		/* Prevent overflow */
+		margin: 0;
+		left: 0;
+		right: 0;
+		border-radius: 0;
+		/* Ensure square corners */
+		box-sizing: border-box;
+		/* Explicitly ensure border-box */
+	}
+
+	.profile-username {
+		max-width: 120px;
+		/* Slightly increased max-width */
+		font-size: 1rem;
+		/* Restored to normal size */
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.header__right {
+		width: 100%;
+		justify-content: space-between;
+		margin-left: 0;
+	}
+}

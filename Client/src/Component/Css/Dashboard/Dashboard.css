@@ -1,0 +1,793 @@
+:root {
+    --rpg-bg: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    --rpg-gold: #ffd700;
+    --rpg-purple: #9d50bb;
+    --rpg-cyan: #00d2ff;
+    --rpg-glass: rgba(255, 255, 255, 0.05);
+    --rpg-border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.dashboard {
+    overflow: hidden;
+    /* Prevent body scroll */
+    height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    background: var(--rpg-bg);
+    color: #fff;
+    width: 100%;
+}
+
+@media (max-width: 900px) {
+    .dashboard {
+        display: block;
+        width: 100vw;
+        height: 100vh;
+        /* Ensure full height on mobile too */
+        overflow: hidden;
+    }
+}
+
+.main-content {
+    height: 100%;
+    overflow-y: auto;
+    /* Scroll content independently */
+    padding: 0;
+    /* Removed global padding to allow full-width header */
+    width: 100%;
+    scrollbar-width: thin;
+    /* Firefox */
+    scrollbar-color: var(--rpg-gold) rgba(0, 0, 0, 0.3);
+}
+
+/* Add padding to the content containers instead */
+.rpg-dashboard,
+.rpg-quest-board,
+.rpg-leaderboard,
+.rpg-shop,
+.rpg-rewards,
+.setting-container,
+.profile-container {
+    padding: 20px;
+    padding-bottom: 60px;
+}
+
+/* Custom Scrollbar for Webkit */
+.main-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.main-content::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.main-content::-webkit-scrollbar-thumb {
+    background-color: var(--rpg-gold);
+    border-radius: 4px;
+}
+
+/* Base RPG Container */
+.rpg-dashboard,
+.rpg-quest-board,
+.rpg-leaderboard,
+.rpg-shop,
+.rpg-rewards {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 60px;
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.section-title {
+    font-family: 'Cinzel', serif;
+    color: var(--rpg-gold);
+    font-size: 2rem;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+    margin-bottom: 30px;
+    border-bottom: 2px solid rgba(255, 215, 0, 0.2);
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+/* Character Header */
+.char-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255, 215, 0, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.avatar-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.avatar-frame {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 3px solid var(--rpg-gold);
+    padding: 5px;
+    background: linear-gradient(45deg, #b8860b, var(--rpg-gold));
+}
+
+.avatar-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #1a1a1a;
+    background-image: url('https://api.dicebear.com/7.x/avataaars/svg?seed=Felix');
+    background-size: cover;
+}
+
+.xp-container {
+    flex: 1;
+    max-width: 350px;
+    margin-left: 40px;
+}
+
+.xp-bar-wrapper {
+    height: 18px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.xp-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--rpg-cyan), var(--rpg-purple));
+    transition: width 0.5s;
+}
+
+.xp-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+
+/* Grid for Quests & Shop */
+.quest-grid,
+.shop-grid,
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+/* Stat Cards */
+.stat-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 215, 0, 0.1);
+    border-radius: 15px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--rpg-gold);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Quests Specific */
+.quest-card {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 215, 0, 0.15);
+    padding: 20px;
+    border-radius: 15px;
+    display: flex;
+    gap: 20px;
+    border-left: 5px solid var(--rpg-gold);
+}
+
+.quest-details {
+    flex: 1;
+}
+
+.quest-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.quest-header h3 {
+    margin: 0;
+    color: var(--rpg-gold);
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+}
+
+.quest-progress {
+    margin: 15px 0;
+}
+
+.progress-bar-bg {
+    height: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: var(--rpg-cyan);
+}
+
+.progress-text {
+    font-size: 0.7rem;
+    color: #888;
+    display: block;
+    margin-top: 5px;
+}
+
+.quest-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.reward-text {
+    font-size: 0.9rem;
+    color: var(--rpg-gold);
+    font-weight: bold;
+}
+
+.claimable {
+    border: 1px solid var(--rpg-gold) !important;
+    background: rgba(255, 215, 0, 0.05) !important;
+}
+
+.glow-border {
+    animation: borderGlow 2s infinite alternate;
+}
+
+@keyframes borderGlow {
+    from {
+        box-shadow: 0 0 5px rgba(255, 215, 0, 0.2);
+    }
+
+    to {
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    }
+}
+
+.completed-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: #888;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    cursor: default;
+}
+
+/* System-level loading */
+.full-portal .main-content {
+    margin-left: 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+}
+
+/* Shop Specific */
+.shop-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    background: linear-gradient(90deg, rgba(255, 215, 0, 0.1), transparent);
+    padding: 20px 30px;
+    border-left: 5px solid var(--rpg-gold);
+    border-radius: 0 20px 20px 0;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.shop-header .section-title {
+    margin-bottom: 0;
+    border-bottom: none;
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+}
+
+.gold-display {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 12px 25px;
+    border-radius: 30px;
+    border: 1px solid var(--rpg-gold);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: var(--rpg-gold);
+    font-size: 1.2rem;
+    font-weight: bold;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.15);
+    backdrop-filter: blur(5px);
+    transition: transform 0.3s;
+}
+
+.gold-display:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
+}
+
+.gold-icon {
+    color: var(--rpg-gold);
+    font-size: 1.5rem;
+    filter: drop-shadow(0 0 5px var(--rpg-gold));
+    animation: spinCoin 3s infinite linear;
+}
+
+@keyframes spinCoin {
+    0% {
+        transform: rotateY(0deg);
+    }
+
+    100% {
+        transform: rotateY(360deg);
+    }
+}
+
+.shop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 10px;
+}
+
+.shop-card {
+    background: linear-gradient(160deg, rgba(30, 30, 30, 0.9), rgba(10, 10, 10, 0.95));
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.shop-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.05) 0%, transparent 70%);
+    opacity: 0;
+    transition: 0.5s;
+    transform: rotate(0deg);
+}
+
+.shop-card:hover {
+    transform: translateY(-10px) scale(1.03);
+    border-color: var(--rpg-gold);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 215, 0, 0.1);
+}
+
+.shop-card:hover::before {
+    opacity: 1;
+    transform: rotate(45deg);
+}
+
+.item-icon {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+    transition: 0.3s;
+}
+
+.shop-card:hover .item-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.type-consumable {
+    color: #ff5555;
+    filter: drop-shadow(0 0 10px rgba(255, 85, 85, 0.4));
+}
+
+.type-gear {
+    color: #c0c0c0;
+    filter: drop-shadow(0 0 10px rgba(192, 192, 192, 0.4));
+}
+
+.type-special {
+    color: #ffd700;
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.4));
+}
+
+.item-info h3 {
+    margin: 0;
+    font-family: 'Cinzel', serif;
+    color: #fff;
+    font-size: 1.2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+}
+
+.item-info p {
+    color: #aaa;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    flex-grow: 1;
+}
+
+.item-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.price {
+    font-weight: bold;
+    color: var(--rpg-gold);
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.buy-btn:disabled {
+    background: #444;
+    color: #888;
+    cursor: not-allowed;
+    transform: none;
+    filter: none;
+}
+
+/* Leaderboard */
+.leaderboard-table {
+    width: 100%;
+    border: 1px solid rgba(255, 215, 0, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.table-header,
+.table-row {
+    display: grid;
+    grid-template-columns: 60px 1fr 100px 150px;
+    padding: 15px 20px;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.table-header {
+    color: var(--rpg-gold);
+    font-weight: bold;
+    font-family: 'Cinzel', serif;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.hero-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-icon {
+    font-size: 1.2rem;
+    opacity: 0.6;
+}
+
+/* Rewards */
+.chest-section {
+    text-align: center;
+    padding: 60px 40px;
+    background: radial-gradient(circle at center, rgba(255, 215, 0, 0.1) 0%, rgba(0, 0, 0, 0.3) 100%);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    margin-bottom: 50px;
+    position: relative;
+    overflow: hidden;
+}
+
+.chest-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://www.transparenttextures.com/patterns/dark-matter.png');
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+.chest-icon {
+    font-size: 5rem;
+    color: var(--rpg-gold);
+    filter: drop-shadow(0 0 20px var(--rpg-gold));
+    margin-bottom: 25px;
+    transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.opening .chest-icon {
+    transform: scale(1.3) rotate(15deg);
+    filter: drop-shadow(0 0 40px var(--rpg-gold));
+}
+
+.pulse-gold {
+    animation: goldGlow 1.5s infinite alternate;
+}
+
+@keyframes goldGlow {
+    from {
+        filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.4));
+    }
+
+    to {
+        filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.8));
+    }
+}
+
+.inventory-title {
+    font-family: 'Cinzel', serif;
+    color: var(--rpg-gold);
+    border-bottom: 2px solid rgba(255, 215, 0, 0.1);
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+
+.loot-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.loot-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.loot-card::after {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 0;
+    width: 3px;
+    height: 80%;
+    background: var(--rarity-color, #fff);
+}
+
+.rarity-common {
+    --rarity-color: #9d9d9d;
+}
+
+.rarity-uncommon {
+    --rarity-color: #1eff00;
+}
+
+.rarity-rare {
+    --rarity-color: #0070dd;
+}
+
+.rarity-epic {
+    --rarity-color: #a335ee;
+}
+
+.rarity-legendary {
+    --rarity-color: #ff8000;
+}
+
+.loot-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-5px);
+}
+
+.loot-icon-wrapper {
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loot-icon {
+    font-size: 1.5rem;
+    color: var(--rarity-color);
+    filter: drop-shadow(0 0 5px var(--rarity-color));
+}
+
+.loot-name {
+    display: block;
+    font-weight: bold;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.loot-bonus {
+    display: block;
+    font-size: 0.8rem;
+    color: #aaa;
+}
+
+.rarity-badge {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 0.6rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    color: var(--rarity-color);
+    border: 1px solid var(--rarity-color);
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+/* Buttons */
+.rpg-btn-primary,
+.buy-btn,
+.claim-btn {
+    background: linear-gradient(90deg, var(--rpg-gold), #b8860b);
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    color: #000;
+    transition: 0.2s;
+}
+
+.rpg-btn-primary:hover,
+.buy-btn:hover,
+.claim-btn:hover {
+    transform: scale(1.05);
+    filter: brightness(1.2);
+}
+
+.locked-btn {
+    background: #333;
+    color: #777;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: not-allowed;
+    font-size: 0.8rem;
+}
+
+/* --- Mobile Utility --- */
+@media (max-width: 900px) {
+    .main-content {
+        padding: 0;
+        /* Removed padding to allow full-width header */
+        padding-bottom: 100px;
+    }
+
+    .section-title {
+        font-size: 1.6rem;
+    }
+
+    .char-header {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+        padding: 20px;
+        margin: -10px -10px 20px -10px;
+        border-radius: 0;
+    }
+
+    .xp-container {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .table-header,
+    .table-row {
+        grid-template-columns: 50px 1fr 80px;
+        font-size: 0.85rem;
+        padding: 12px 15px;
+    }
+
+    .table-header span:nth-child(4),
+    .table-row span:nth-child(4) {
+        display: none;
+    }
+
+    .stats-grid,
+    .quest-grid,
+    .shop-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Leaderboard Specific Enhancements */
+.self-highlight {
+    background: rgba(255, 215, 0, 0.1) !important;
+    border-left: 4px solid var(--rpg-gold) !important;
+}
+
+.rank-cell {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(1.2);
+}
+
+.crown {
+    color: var(--rpg-gold);
+    filter: drop-shadow(0 0 5px var(--rpg-gold));
+}
+
+.medal-silver {
+    color: #c0c0c0;
+}
+
+.medal-bronze {
+    color: #cd7f32;
+}
+
+.you-badge {
+    background: var(--rpg-gold);
+    color: #000;
+    font-size: 0.6rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.leaderboard-table .table-row {
+    transition: background 0.2s;
+}
+
+.leaderboard-table .table-row:hover {
+    background: rgba(255, 255, 255, 0.05);
+}

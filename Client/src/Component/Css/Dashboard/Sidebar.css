@@ -1,0 +1,301 @@
+/* Sidebar.css - Premium High-Fantasy RPG Theme */
+.rpg-sidebar {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 280px;
+  background: linear-gradient(180deg, #16222a 0%, #1a1a2e 100%);
+  border-right: 2px solid var(--rpg-gold);
+  padding: 30px 20px;
+  height: 100%;
+  /* Match grid height */
+  box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
+  transition: width 0.3s ease;
+  z-index: 1000;
+  overflow-y: auto;
+  /* Allow sidebar scroll if content is too tall */
+  scrollbar-width: none;
+  /* Hide sidebar scrollbar for clean look */
+}
+
+/* Hide scrollbar for sidebar */
+.rpg-sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+.sidebar-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+  margin-bottom: 20px;
+}
+
+.guild-logo-container {
+  width: 70px;
+  height: 70px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 2px solid var(--rpg-gold);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+  transition: transform 0.3s;
+}
+
+.guild-logo-container:hover {
+  transform: rotate(5deg) scale(1.05);
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+}
+
+.guild-title {
+  font-family: 'Cinzel', serif;
+  color: var(--rpg-gold);
+  font-size: 1.4rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.sidebar-menu ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.sidebar-menu ul li a {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 20px;
+  color: #a0aec0;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid transparent;
+}
+
+.icon-glow {
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s;
+}
+
+.sidebar-menu ul li a:hover,
+.sidebar-menu ul li.active a {
+  color: white;
+  background: rgba(255, 215, 0, 0.08);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  box-shadow: inset 0 0 15px rgba(255, 215, 0, 0.1);
+}
+
+.sidebar-menu ul li.active a .icon-glow,
+.sidebar-menu ul li a:hover .icon-glow {
+  color: var(--rpg-gold);
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 5px var(--rpg-gold));
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.char-mini-card {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 215, 0, 0.15);
+  border-radius: 15px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+  transition: transform 0.3s;
+}
+
+.char-mini-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--rpg-gold);
+}
+
+.mini-avatar {
+  width: 45px;
+  height: 45px;
+  background: linear-gradient(45deg, var(--rpg-gold), #b8860b);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: black;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+}
+
+.mini-stats {
+  display: flex;
+  flex-direction: column;
+}
+
+.mini-name {
+  color: white;
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+.mini-lv-gold {
+  display: flex;
+  gap: 10px;
+  font-size: 0.8rem;
+}
+
+.lv-tag {
+  color: var(--rpg-cyan);
+}
+
+.gold-tag {
+  color: var(--rpg-gold);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.footer-actions {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.footer-actions svg {
+  font-size: 1.5rem;
+  color: #718096;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.footer-actions svg:hover {
+  color: var(--rpg-gold);
+  filter: drop-shadow(0 0 5px var(--rpg-gold));
+}
+
+.sidebar-logout-btn {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+@media (max-width: 900px) {
+  .rpg-sidebar {
+    width: auto;
+    /* Use auto width with left/right: 0 */
+    max-width: 100vw;
+    /* Prevent overflow */
+    box-sizing: border-box;
+    /* Include padding/border in width */
+    height: auto;
+    position: fixed;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    flex-direction: row;
+    height: 60px;
+    /* Reduced height */
+    padding: 0;
+    /* Remove side padding to use full width */
+    border-right: none;
+    border-top: 2px solid var(--rpg-gold);
+    border-radius: 15px 15px 0 0;
+    justify-content: center;
+    background: #1a1a2e;
+    /* Solid background */
+    z-index: 1000;
+  }
+
+  .sidebar-head,
+  .sidebar-footer {
+    display: none !important;
+  }
+
+  .sidebar-menu {
+    width: 100%;
+    margin: 0;
+  }
+
+  .sidebar-menu ul {
+    flex-direction: row;
+    justify-content: space-between;
+    /* Use space-between for edge-to-edge control */
+    width: 100%;
+    padding: 0 15px;
+    /* Add explicit, equal padding on both sides */
+    margin: 0;
+    align-items: center;
+    height: 100%;
+    box-sizing: border-box;
+  }
+
+  .sidebar-menu ul li {
+    flex: 1;
+    /* Allow items to share space equally */
+    display: flex;
+    justify-content: center;
+  }
+
+  .sidebar-menu ul li a {
+    padding: 8px 2px;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 0;
+    /* Hide text completely to save space */
+    width: 100%;
+    border-radius: 8px;
+    justify-content: center;
+  }
+
+  /* Show text only if active for context, or just icons to fit 7 items */
+  /* For 7 items, text is likely impossible. Hiding text effectively. */
+
+  .icon-glow {
+    font-size: 1.4rem;
+    /* Slightly larger icon */
+    margin: 0 auto;
+  }
+
+  .sidebar-menu ul li.active a {
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    /* Remove ALL borders, not just bottom */
+    border-radius: 0;
+  }
+
+  .sidebar-menu ul li.active a .icon-glow {
+    transform: translateY(-2px);
+    text-shadow: 0 0 10px var(--rpg-gold);
+  }
+
+  /* Mobile Logout Special Styling */
+  .logout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #ff4d4d;
+  }
+
+  .logout .text {
+    display: none;
+  }
+
+  .logout svg {
+    font-size: 1.4rem;
+  }
+}

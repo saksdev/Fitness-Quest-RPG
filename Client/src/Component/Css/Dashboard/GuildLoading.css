@@ -1,0 +1,154 @@
+.guild-portal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at center, #1a1a2e 0%, #0f0c29 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.portal-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.05) 0%, transparent 70%);
+    filter: blur(50px);
+    animation: pulseGlow 4s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+}
+
+.loading-core {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    z-index: 10;
+}
+
+.rpg-spinner-wrapper {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rpg-portal-spinner {
+    font-size: 4rem;
+    color: var(--rpg-gold);
+    filter: drop-shadow(0 0 15px var(--rpg-gold));
+    animation: float 3s ease-in-out infinite;
+    display: block;
+}
+
+.spinner-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px solid transparent;
+    border-top: 2px solid var(--rpg-gold);
+    border-bottom: 2px solid var(--rpg-gold);
+    border-radius: 50%;
+    animation: rotate 2s linear infinite;
+}
+
+.loading-text-container {
+    text-align: center;
+}
+
+.portal-title {
+    font-family: 'Cinzel', serif;
+    /* Assuming fantasy font is available or fallbacks to serif */
+    color: var(--rpg-gold);
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+}
+
+.fantasy-tip {
+    color: var(--rpg-cyan);
+    font-size: 1.1rem;
+    font-style: italic;
+    opacity: 0.8;
+    height: 1.5rem;
+    transition: opacity 0.5s;
+}
+
+.loading-footer {
+    position: absolute;
+    bottom: 50px;
+    width: 300px;
+}
+
+.loading-progress-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.loading-progress-fill {
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--rpg-gold), #fff);
+    animation: loadProgress 2.5s ease-in-out infinite;
+}
+
+@keyframes loadProgress {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    50% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
