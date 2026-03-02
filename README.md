@@ -1,110 +1,62 @@
-# Fitness Quest - Fitness RPG 🏋️‍♂️🎮
+# Fitness Quest - Fitness RPG V2 🏋️‍♂️🎮
 
-Fitness Quest is a full-stack "Fitness RPG" application that gamifies your fitness journey. Track your stats, sync with Fitbit, and level up your character as you hit your real-world health goals.
+Fitness Quest V2 is a comprehensive "Fitness RPG" application that transforms your real-world health data into a gamified experience. Level up, earn gold, complete quests, and compete on the leaderboard!
 
-## 🚀 Recent Updates
-- **Vite Migration**: The frontend has been migrated from Create React App to **Vite** for significantly faster build times and a smoother development experience.
-- **Improved Authentication**: Migrated to standard ports (5173/5000) and optimized CORS/Cookie handling.
-- **Third-Party Integrations**: Integrated **EmailJS** for direct, reliable contact form submissions.
+## 🚀 What's New in V2?
+
+- **Full RPG System**: Earn **XP** and **Gold** by being active. Level up your character and buy items in the **Shop**.
+- **Quests & Rewards**: Complete challenges to earn rewards. Claim your **Daily Reward** to keep the streak going!
+- **Multi-Integration**: Support for both **Fitbit** and **Google Fit** for maximum flexibility.
+- **Admin Dashboard**: Manage users, quests, and rewards from a dedicated admin interface.
+- **Vite-Powered**: Faster development and builds using Vite and a optimized proxy setup.
 
 ## 🛠️ Tech Stack
 
 ### Frontend
-- **Framework**: React (Vite)
-- **Routing**: React Router DOM (v6)
-- **Forms & Validation**: Formik + Yup
-- **Charts**: Chart.js (react-chartjs-2)
-- **Notifications**: React Hot Toast
-- **Icons**: React Icons + FontAwesome
-- **API Handling**: Axios (with centralized configuration)
+- **React (Vite)**: Modern, lightning-fast UI development.
+- **Gamified UI**: Custom RPG-themed dashboard and components.
+- **State & Routing**: React Router DOM (v6), Formik + Yup for data handling.
+- **Visuals**: Chart.js for health trends, React Hot Toast for micro-interactions.
 
 ### Backend
-- **Framework**: Node.js + Express
-- **Database**: MongoDB (via Mongoose)
-- **Authentication**: JWT (JSON Web Tokens) with Secure HTTP-Only Cookies
-- **File Storage**: Cloudinary (via Multer)
-- **Integrations**: Fitbit Web API
-- **Middleware**: Custom Authentication & Error Handling
+- **Node.js & Express**: High-performance API architecture with standard `/api/` prefix.
+- **MongoDB**: Flexible data modeling for RPG stats and user inventory.
+- **OAuth 2.0**: Secure integrations with Google Fit and Fitbit.
+- **Security**: JWT-based authentication with Secure HTTP-Only cookies.
 
 ## ✨ Key Features
-- **RPG Dashboard**: View your fitness stats as character progression data.
-- **Fitbit Sync**: Connect your Fitbit account to automatically import activity and step counts.
-- **Visual Progress**: Dynamic charts showing your daily and weekly fitness trends.
-- **Secure Profiles**: User accounts with profile picture uploads and bio management.
-- **Contact System**: Direct communication using the integrate EmailJS service.
+
+- **🛡️ Character Stats**: Track Level, XP, Points, and Gold based on your fitness.
+- **🏆 Leaderboard**: See how you rank against other fitness adventurers.
+- **🎁 Rewards**: Open chests and claim daily bonuses for consistent activity.
+- **🛒 RPG Shop**: Use your hard-earned gold to buy legendary items for your inventory.
+- **📊 Health Sync**: Seamlessly sync steps, calories, and distance from major fitness platforms.
 
 ## 📂 Project Structure
 ```text
 Fitness Project/
 ├── Client/              # React frontend (Vite)
-│   ├── src/
-│   │   ├── Component/   # UI Components & Pages
-│   │   ├── api.jsx      # Centralized API Caller
-│   │   └── index.jsx    # Entry Point
-│   └── vite.config.js   # Vite Configuration
+│   ├── src/Component/   # RPG UI Components & Dashboard
+│   └── vite.config.js   # Dev Server & Proxy Settings
 └── Server/              # Express backend
-    ├── config/          # DB & CORS configuration
-    ├── controller/      # Business logic
-    ├── models/          # Mongoose schemas
-    ├── Route/           # API endpoints
+    ├── Route/           # Multi-integration & RPG API Endpoints
+    ├── models/User.js   # Expanded User Schema with RPG stats
     └── index.js         # Entry Point
 ```
 
 ## ⚙️ Setup Instructions
 
-### Prerequisites
-- [Node.js](https://nodejs.org/) installed.
-- [MongoDB](https://www.mongodb.com/) instance (local or Atlas).
-
 ### 1. Server Setup
-1. Navigate to the server folder:
-   ```bash
-   cd Server
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Create a `.env` file and add:
-   ```env
-   JWT_SECRET=your_secret
-   MONGO_URI=your_mongodb_uri
-   CLOUDINARY_CLOUD_NAME=...
-   CLOUDINARY_API_KEY=...
-   CLOUDINARY_API_SECRET=...
-   FITBIT_CLIENT_ID=...
-   FITBIT_CLIENT_SECRET=...
-   FITBIT_CALLBACK_URL=http://localhost:5000/api/dashboard/fitbit/callback
-   FRONTEND_URL=http://localhost:5173
-   ```
-4. Start the backend:
-   ```bash
-   npm run dev
-   ```
+1. `cd Server`
+2. `npm install`
+3. Copy `.env.example` to `.env` and fill in your credentials (MongoDB, JWT, Cloudinary, Fitbit, Google).
+4. `npm run dev`
 
 ### 2. Client Setup
-1. Navigate to the client folder:
-   ```bash
-   cd Client
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Create a `.env` file and add your EmailJS/API credentials:
-   ```env
-   VITE_EMAILJS_SERVICE_ID=...
-   VITE_EMAILJS_TEMPLATE_ID=...
-   VITE_EMAILJS_PUBLIC_KEY=...
-   ```
-4. Start the frontend:
-   ```bash
-   npm run dev
-   ```
-
-## 🌐 Access
-- **Frontend**: [http://localhost:5173](http://localhost:5173)
-- **Backend API**: [http://localhost:5000](http://localhost:5000)
+1. `cd Client`
+2. `npm install`
+3. Copy `.env.example` to `.env` and fill in your EmailJS credentials.
+4. `npm run dev`
 
 ---
-Developed with ❤️ for Fitness Enthusiasts.
+Developed with ❤️ for the Fitness Community.
