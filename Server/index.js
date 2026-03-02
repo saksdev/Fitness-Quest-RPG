@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const db = require('./config/dbconnection');
-const { authenticateToken, getUserDashboardData } = require('./Route/UserDashboard');
+const { getUserDashboardData } = require('./Route/UserDashboard');
 const { isAuthenticated } = require('./middlewares/auth');
 const { handleError } = require('./utils/errorhandler');
 const corsMiddleware = require('./config/corsConfig');

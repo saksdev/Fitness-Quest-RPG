@@ -2,8 +2,7 @@ const cors = require('cors');
 
 const allowedOrigins = [
     process.env.FRONTEND_URL,
-    process.env.CLIENT_URL, // Allow the deployed frontend URL (e.g., Vercel)
-].filter(Boolean); // Remove undefined if CLIENT_URL is not set
+].filter(Boolean);
 
 const corsOptions = {
     origin: function (origin, callback) {
