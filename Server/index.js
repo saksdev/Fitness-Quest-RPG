@@ -8,8 +8,7 @@ const { handleError } = require('./utils/errorhandler');
 const corsMiddleware = require('./config/corsConfig');
 const signupController = require('./controller/SignupController');
 const loginController = require('./controller/LoginController');
-// const contactController = require('./controller/contactController');
-const profileRoutes = require('./Route/profileRoutes');
+// const profileRoutes = require('./Route/profileRoutes');
 // const settingsRoutes = require('./Route/settingsRoutes.js');
 const uploadRoutes = require('./Route/uploadRoutes');
 const { logoutHandler } = require('./Route/Logout');
@@ -19,7 +18,6 @@ const leaderboardRoutes = require('./Route/leaderboardRoutes');
 const rewardRoutes = require('./Route/rewardRoutes');
 const questRoutes = require('./Route/questRoutes');
 const shopRoutes = require('./Route/shopRoutes');
-// const forgotPasswordController = require('./controller/ForgotPasswordController');
 
 const app = express();
 app.use(corsMiddleware);
@@ -37,12 +35,6 @@ app.post('/api/login', loginController.login);
 
 // Logout route
 app.post('/api/logout', isAuthenticated, logoutHandler);
-
-// Contact route - Moved to third-party service (EmailJS)
-
-// Forgot Password routes
-// app.post('/forgot-password', forgotPasswordController.forgotPassword);
-// app.post('/reset-password', forgotPasswordController.resetPassword);
 
 // Auth check route
 app.get('/api/auth', isAuthenticated, (req, res) => {
